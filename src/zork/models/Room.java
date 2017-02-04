@@ -1,6 +1,6 @@
 package zork.models;
 
-import zork.ValidCommands;
+import zork.Commands;
 
 /**
  *
@@ -74,7 +74,7 @@ public class Room {
      * @param direction 
      * @return  
      */
-    public Room goToNextRoom(ValidCommands direction){
+    public Room goToNextRoom(Commands direction){
         
         Room room = this;
         

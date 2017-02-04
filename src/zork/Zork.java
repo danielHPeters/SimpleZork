@@ -82,11 +82,11 @@ public class Zork {
             
             System.out.println("What do you want to do?");
 
-            Queue<ValidCommands> commands = parser.getCommand();
+            Queue<Commands> commands = parser.getCommand();
 
             while (!commands.isEmpty()) {
 
-                ValidCommands command = commands.poll();
+                Commands command = commands.poll();
 
                 switch (command) {
                     case HELP:

@@ -28,9 +28,9 @@ public class Parser {
      *
      * @return 
      */
-    public Queue<ValidCommands> getCommand() {
+    public Queue<Commands> getCommand() {
 
-        Queue<ValidCommands> commands = new LinkedList<>();
+        Queue<Commands> commands = new LinkedList<>();
         String userCommand = scanner.nextLine().toUpperCase();
         String[] foundWords = userCommand.split(" ");
 
@@ -38,7 +38,7 @@ public class Parser {
 
             try {
                 
-                ValidCommands value = ValidCommands.valueOf(word);
+                Commands value = Commands.valueOf(word);
                 commands.add(value);
                 
             } catch (IllegalArgumentException e) {
