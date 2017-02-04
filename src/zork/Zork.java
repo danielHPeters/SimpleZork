@@ -77,9 +77,8 @@ public class Zork {
 
         while (this.loop.isRunning()) {
 
-            
-             System.out.println("You are in the " + this.currentRoom.getName());
-            
+            System.out.println("You are in the " + this.currentRoom.getName());
+
             System.out.println("What do you want to do?");
 
             Queue<Commands> commands = parser.getCommand();
@@ -97,16 +96,19 @@ public class Zork {
                         goodbyeMessage();
                         break;
                     case GO:
-                        if (!commands.isEmpty()) {
+                        if (commands.isEmpty()) {
 
-                            command = commands.poll();
-                            Room nextRoom = currentRoom.goToNextRoom(command);
-                            if(nextRoom != null){
-                                currentRoom = nextRoom;
-                            } else {
-                                System.out.println("You walked into a wall...");
-                            }
-                            
+                            System.out.println("Where do you want to go?");
+                            commands = parser.getCommand();
+
+                        }
+                        command = commands.poll();
+                        Room nextRoom = currentRoom.goToNextRoom(command);
+
+                        if (nextRoom != null) {
+                            currentRoom = nextRoom;
+                        } else {
+                            System.out.println("You walked into a wall...");
                         }
                         break;
                 }
@@ -124,8 +126,8 @@ public class Zork {
         System.out.println("Hail brave adventurer. Welcome to Zork.");
 
     }
-    
-    public void goodbyeMessage(){
+
+    public void goodbyeMessage() {
         System.out.println("See you again soon Adventurer!");
     }
 
