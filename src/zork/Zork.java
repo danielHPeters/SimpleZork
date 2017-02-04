@@ -99,17 +99,20 @@ public class Zork {
                         if (commands.isEmpty()) {
 
                             System.out.println("Where do you want to go?");
-                            commands = parser.getCommand();
+                            commands = this.parser.getCommand();
 
                         }
                         command = commands.poll();
-                        Room nextRoom = currentRoom.goToNextRoom(command);
+                        Room nextRoom = this.currentRoom.goToNextRoom(command);
 
                         if (nextRoom != null) {
-                            currentRoom = nextRoom;
+                            this.currentRoom = nextRoom;
                         } else {
                             System.out.println("You walked into a wall...");
                         }
+                        break;
+                    case DESCRIBE:
+                        System.out.println(this.currentRoom.getDescription());
                         break;
                 }
 
