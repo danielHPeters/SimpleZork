@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zork.models;
 
-import zork.Directions;
+import zork.ValidCommands;
 
 /**
  *
@@ -16,12 +11,12 @@ public class Room {
     /**
      * Name of this room
      */
-    private String name;
+    private final String name;
 
     /**
      * Short description of the room
      */
-    private String description;
+    private final String description;
 
     /**
      * Exit north of this room
@@ -79,9 +74,9 @@ public class Room {
      * @param direction 
      * @return  
      */
-    public Room goToNextRoom(Directions direction){
+    public Room goToNextRoom(ValidCommands direction){
         
-        Room room = null;
+        Room room = this;
         
         switch(direction){
             case NORTH:
@@ -98,6 +93,7 @@ public class Room {
                 break;
             default:
                 System.out.println("Invalid Direction.");
+                break;
         }
         
         return room;

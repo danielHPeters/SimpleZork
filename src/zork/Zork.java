@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zork;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 import zork.models.Room;
 
 /**
@@ -16,92 +12,132 @@ import zork.models.Room;
 public class Zork {
 
     /**
-     * 
+     *
      */
     private Parser parser;
-    
+
     /**
      * Current location of the player
      */
     private Room currentRoom;
-    
+
     /**
      * All the rooms
      */
     private List<Room> rooms;
-    
+
     /**
-     * 
+     *
      */
     private ZorkLoop loop;
-    
+
+    public Zork() {
+
+        this.loop = new ZorkLoop();
+        this.parser = new Parser();
+
+    }
+
     /**
-     * 
+     *
      */
-    public void initRooms(){
-        
+    public void initRooms() {
+
         Room garden = new Room("Garden", "The King's Garden. A very pleasang Place.");
         Room throneRoom = new Room("Throne Room", "The King is awaiting you.");
         Room armory = new Room("Armory", "The armory is filled with Swords and Muskets.");
         Room diningRoom = new Room("Dining Room", "You see a grand table with lots of chairs around it.");
         Room kitchen = new Room("Kitchen", "You smell a Steak sizzling on a fire.");
-        
+
         garden.setExits(null, null, throneRoom, null);
         throneRoom.setExits(garden, null, diningRoom, armory);
         armory.setExits(null, throneRoom, null, null);
         diningRoom.setExits(throneRoom, null, kitchen, null);
         kitchen.setExits(diningRoom, null, null, null);
-        
+
         this.rooms = new ArrayList<>();
         this.rooms.add(garden);
         this.rooms.add(throneRoom);
         this.rooms.add(armory);
         this.rooms.add(diningRoom);
         this.rooms.add(kitchen);
-        
+
         this.currentRoom = rooms.get(3);
-        
+
     }
-    
+
     /**
-     * 
+     *
      */
-    public void run(){
-        
+    public void run() {
+
         welcomeMessage();
-        
-        this.loop = new ZorkLoop();
+
         this.loop.start();
-        
-        while(this.loop.isRunning()){
+
+        while (this.loop.isRunning()) {
+
             
-            this.loop.quit();
+             System.out.println("You are in the " + this.currentRoom.getName());
             
+            System.out.println("What do you want to do?");
+
+            Queue<ValidCommands> commands = parser.getCommand();
+
+            while (!commands.isEmpty()) {
+
+                ValidCommands command = commands.poll();
+
+                switch (command) {
+                    case HELP:
+                        System.out.println("Dummy help message.");
+                        break;
+                    case QUIT:
+                        this.loop.quit();
+                        goodbyeMessage();
+                        break;
+                    case GO:
+                        if (!commands.isEmpty()) {
+
+                            command = commands.poll();
+                            Room nextRoom = currentRoom.goToNextRoom(command);
+                            if(nextRoom != null){
+                                currentRoom = nextRoom;
+                            } else {
+                                System.out.println("You walked into a wall...");
+                            }
+                            
+                        }
+                        break;
+                }
+
+            }
         }
-        
+
     }
-    
+
     /**
-     * 
+     *
      */
-    public void welcomeMessage(){
-        
+    public void welcomeMessage() {
+
         System.out.println("Hail brave adventurer. Welcome to Zork.");
-        System.out.println("You start in the " + this.currentRoom.getName());
-        
+
     }
     
-    
+    public void goodbyeMessage(){
+        System.out.println("See you again soon Adventurer!");
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         Zork game = new Zork();
         game.initRooms();
         game.run();
-        
-        
+
     }
-    
+
 }
