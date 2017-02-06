@@ -1,6 +1,9 @@
 package zork.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import zork.Command;
+import zork.models.items.Item;
 
 /**
  *
@@ -37,6 +40,11 @@ public class Room {
      * Exit west of this room
      */
     private Room west;
+    
+    /**
+     * 
+     */
+    private List<Item> items;
 
     /**
      * Default constructor. Sets the name and the description of the room
@@ -66,6 +74,7 @@ public class Room {
         this.east = east;
         this.south = south;
         this.west = west;
+        this.items = new ArrayList<>();
         
     }
     
@@ -114,6 +123,23 @@ public class Room {
     public String getDescription() {
         return description;
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public List<Item> getItems() {
+        return items;
+    }
+
+    /**
+     * 
+     * @param items 
+     */
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+    
     
     
 }

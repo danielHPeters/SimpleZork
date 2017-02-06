@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import zork.models.Room;
+import zork.models.items.Item;
 
 /**
  *
@@ -48,12 +49,18 @@ public class Zork {
         Room armory = new Room("Armory", "The armory is filled with Swords and Muskets.");
         Room diningRoom = new Room("Dining Room", "You see a grand table with lots of chairs around it.");
         Room kitchen = new Room("Kitchen", "You smell a Steak sizzling on a fire.");
+        
+        Item shovel = new Item("shovel", "A rusty shovel", 1);
+        Item bucket = new Item("bucket", "It has a hole in it.", 0);
 
         garden.setExits(null, null, throneRoom, null);
         throneRoom.setExits(garden, null, diningRoom, armory);
         armory.setExits(null, throneRoom, null, null);
         diningRoom.setExits(throneRoom, null, kitchen, null);
         kitchen.setExits(diningRoom, null, null, null);
+        
+        garden.getItems().add(shovel);
+        garden.getItems().add(bucket);
 
         this.rooms = new ArrayList<>();
         this.rooms.add(garden);
@@ -114,6 +121,23 @@ public class Zork {
                     case DESCRIBE:
                         System.out.println(this.currentRoom.getDescription());
                         break;
+                    case TAKE:
+                        if (commands.isEmpty()) {
+
+                            System.out.println("Take what?");
+                            commands = this.parser.getCommand();
+
+                        }
+                        command = commands.poll();
+                        if (command.equals(Command.ALL)){
+                            List<Item> items = this.currentRoom.getItems();
+                            this.currentRoom.getItems().forEach((item)->{
+                                System.out.println("You picked up a " + item.getName() + ".");
+                            });
+                            this.currentRoom.getItems().clear();
+                        }
+                        break;
+                        
                 }
 
             }
