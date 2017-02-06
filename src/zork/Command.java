@@ -15,7 +15,8 @@ public enum Command {
     EAST("Your character goes east if your previous command was GO."),
     WEST("Your character goes west if your previous command was GO."),
     TAKE("Take an item which you need to specify afterwards."),
-    ALL("Pick up all items when combined with take.");
+    ALL("Pick up all items when combined with take."),
+    INVENTORY("Display items in your inventory.");
     
     private final String details;
 

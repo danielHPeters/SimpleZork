@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import zork.models.Room;
+import zork.models.entities.Player;
 import zork.models.items.Item;
 
 /**
@@ -30,12 +31,21 @@ public class Zork {
     /**
      *
      */
+    private Player player;
+
+    /**
+     *
+     */
     private ZorkLoop loop;
 
+    /**
+     *
+     */
     public Zork() {
 
         this.loop = new ZorkLoop();
         this.parser = new Parser();
+        this.player = new Player("Noob", 18);
 
     }
 
@@ -44,12 +54,12 @@ public class Zork {
      */
     public void initRooms() {
 
-        Room garden = new Room("Garden", "The King's Garden. A very pleasang Place.");
-        Room throneRoom = new Room("Throne Room", "The King is awaiting you.");
-        Room armory = new Room("Armory", "The armory is filled with Swords and Muskets.");
+        Room garden = new Room("Garden", "The King's Garden. A very pleasant place.");
+        Room throneRoom = new Room("Throne Room", "The kining is awaiting you.");
+        Room armory = new Room("Armory", "The armory is filled with swords and muskets.");
         Room diningRoom = new Room("Dining Room", "You see a grand table with lots of chairs around it.");
-        Room kitchen = new Room("Kitchen", "You smell a Steak sizzling on a fire.");
-        
+        Room kitchen = new Room("Kitchen", "You smell a steak sizzling on a fire.");
+
         Item shovel = new Item("shovel", "A rusty shovel", 1);
         Item bucket = new Item("bucket", "It has a hole in it.", 0);
 
@@ -58,7 +68,7 @@ public class Zork {
         armory.setExits(null, throneRoom, null, null);
         diningRoom.setExits(throneRoom, null, kitchen, null);
         kitchen.setExits(diningRoom, null, null, null);
-        
+
         garden.getItems().add(shovel);
         garden.getItems().add(bucket);
 
@@ -129,15 +139,17 @@ public class Zork {
 
                         }
                         command = commands.poll();
-                        if (command.equals(Command.ALL)){
+                        if (command.equals(Command.ALL)) {
                             List<Item> items = this.currentRoom.getItems();
-                            this.currentRoom.getItems().forEach((item)->{
+                            this.currentRoom.getItems().forEach((item) -> {
                                 System.out.println("You picked up a " + item.getName() + ".");
+                                this.player.getInventory().add(item);
                             });
                             this.currentRoom.getItems().clear();
                         }
                         break;
-                        
+                    case INVENTORY:
+                        this.player.showInventory();
                 }
 
             }
@@ -150,7 +162,7 @@ public class Zork {
      */
     public void welcomeMessage() {
 
-        System.out.println("Hail brave adventurer. Welcome to Zork.");
+        System.out.println("Hail brave " + this.player.getName() + ". Welcome to Zork.");
 
     }
 
@@ -158,18 +170,18 @@ public class Zork {
      * Message printed when the player quits the game
      */
     public void goodbyeMessage() {
-        System.out.println("See you again soon Adventurer!");
+        System.out.println("See you again soon " + this.player.getName() + "!");
     }
-    
+
     /**
      * List the Command available
      */
-    public void showHelp(){
-        
-        for (Command c : Command.values()){
+    public void showHelp() {
+
+        for (Command c : Command.values()) {
             System.out.println(c + " - " + c.getDetails());
         }
-        
+
     }
 
     /**
