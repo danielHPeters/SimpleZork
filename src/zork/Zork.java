@@ -81,15 +81,15 @@ public class Zork {
 
             System.out.println("What do you want to do?");
 
-            Queue<Commands> commands = parser.getCommand();
+            Queue<Command> commands = parser.getCommand();
 
             while (!commands.isEmpty()) {
 
-                Commands command = commands.poll();
+                Command command = commands.poll();
 
                 switch (command) {
                     case HELP:
-                        System.out.println("Dummy help message.");
+                        showHelp();
                         break;
                     case QUIT:
                         this.loop.quit();
@@ -122,7 +122,7 @@ public class Zork {
     }
 
     /**
-     *
+     * Message printed when the player starts the game
      */
     public void welcomeMessage() {
 
@@ -130,8 +130,22 @@ public class Zork {
 
     }
 
+    /**
+     * Message printed when the player quits the game
+     */
     public void goodbyeMessage() {
         System.out.println("See you again soon Adventurer!");
+    }
+    
+    /**
+     * List the Command available
+     */
+    public void showHelp(){
+        
+        for (Command c : Command.values()){
+            System.out.println(c + " - " + c.getDetails());
+        }
+        
     }
 
     /**
