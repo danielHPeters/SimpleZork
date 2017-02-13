@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Queue;
 import zork.models.Room;
 import zork.models.entities.Player;
+import zork.models.items.AxeAction;
 import zork.models.items.Item;
-import zork.models.items.UsableItem;
+import zork.models.items.ShovelAction;
+import zork.models.items.Wood;
 
 /**
  *
@@ -61,8 +63,10 @@ public class Zork {
         Room diningRoom = new Room("Dining Room", "You see a grand table with lots of chairs around it.");
         Room kitchen = new Room("Kitchen", "You smell a steak sizzling on a fire.");
 
-        Item shovel = new Item("shovel", "A rusty shovel", 1);
-        Item bucket = new UsableItem("bucket", "It has a hole in it.", 0);
+        Item shovel = new Item("shovel", "A rusty shovel", 1, new ShovelAction());
+        Item bucket = new Item("bucket", "It has a hole in it.", 0);
+        Item axe = new Item("axe", "A dangerous looking weapon.", 10, new AxeAction());
+        Item wood = new Item("wood", "???", 100000, new Wood(this.player));
 
         garden.setExits(null, null, throneRoom, null);
         throneRoom.setExits(garden, null, diningRoom, armory);
@@ -72,6 +76,8 @@ public class Zork {
 
         garden.getItems().add(shovel);
         garden.getItems().add(bucket);
+        armory.getItems().add(axe);
+        throneRoom.getItems().add(wood);
 
         this.rooms = new ArrayList<>();
         this.rooms.add(garden);
@@ -140,10 +146,10 @@ public class Zork {
 
                         }
                         command = commands.poll();
+                        
                         if (command.equals(Command.ALL)) {
-                            List<Item> items = this.currentRoom.getItems();
                             this.currentRoom.getItems().forEach((item) -> {
-                                System.out.println("You picked up a " + item.getName() + ".");
+                                System.out.println(item.getName() + " added to your inventory.");
                                 this.player.getInventory().add(item);
                             });
                             this.currentRoom.getItems().clear();

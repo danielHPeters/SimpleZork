@@ -3,7 +3,6 @@ package zork.models.entities;
 import java.util.ArrayList;
 import java.util.List;
 import zork.models.items.Item;
-import zork.interfaces.IUseable;
 
 /**
  *
@@ -60,11 +59,7 @@ public class Player extends DamageAbleEntity {
      */
     public void useItem(Item item) {
 
-        if (item instanceof IUseable) {
-            System.out.println(item.getName() + " used.");
-        } else {
-            System.out.println("You can't use the " + item.getName() + ".");
-        }
+        item.use();
     }
     
     /**
@@ -74,6 +69,11 @@ public class Player extends DamageAbleEntity {
         this.stats.forEach((eStat, stat)->{
             System.out.println(eStat + ": " + stat.getValue());
         });
+    }
+
+    @Override
+    public void move() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

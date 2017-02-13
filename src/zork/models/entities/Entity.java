@@ -2,12 +2,13 @@ package zork.models.entities;
 
 import java.util.EnumMap;
 import java.util.Map;
+import zork.interfaces.IMoveable;
 
 /**
  *
  * @author d.peters
  */
-public class Entity {
+public abstract class Entity implements IMoveable{
     
     /**
      * 

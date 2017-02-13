@@ -11,7 +11,7 @@ import zork.interfaces.IDamageable;
  *
  * @author d.peters
  */
-public class DamageAbleEntity extends Entity implements IDamageable {
+public abstract class DamageAbleEntity extends Entity implements IDamageable {
 
     /**
      *

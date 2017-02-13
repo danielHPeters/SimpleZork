@@ -5,12 +5,16 @@
  */
 package zork.models.items;
 
+import zork.interfaces.IUseable;
+
 /**
  *
  * @author d.peters
  */
 public class Item {
 
+    private final IUseable action;
+    
     /**
      *
      */
@@ -37,7 +41,16 @@ public class Item {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.action = null;
 
+    }
+    
+    public Item(String name, String description, double price, IUseable action) {
+        
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.action = action;
     }
 
     /**
@@ -86,6 +99,19 @@ public class Item {
      */
     public void setPrice(double price) {
         this.price = price;
+    }
+    
+    /**
+     * 
+     */
+    public void use() {
+        
+        if (this.action == null){
+            System.out.println("You cannot use the " + this.name + ".");
+        } else {
+            this.action.use();
+        }
+        
     }
     
 
