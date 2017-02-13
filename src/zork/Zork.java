@@ -3,6 +3,7 @@ package zork;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Scanner;
 import zork.models.Room;
 import zork.models.entities.Player;
 import zork.models.items.AxeAction;
@@ -15,6 +16,8 @@ import zork.models.items.Wood;
  * @author d.peters
  */
 public class Zork {
+
+    private Scanner scanner;
 
     /**
      *
@@ -46,16 +49,45 @@ public class Zork {
      */
     public Zork() {
 
+        this.scanner = new Scanner(System.in);
         this.loop = new ZorkLoop();
-        this.parser = new Parser();
-        this.player = new Player("Noob", 18);
+        this.parser = new Parser(this.scanner);
+        initPlayer();
+        initRooms();
 
+    }
+
+    private void initPlayer() {
+
+        String name = null;
+        int age = 0;
+
+        System.out.println("What's your name?");
+        
+        while (name == null) {
+
+                name = this.scanner.nextLine();
+
+        }
+
+        System.out.println("How Old are you?");
+        while (age <= 0) {
+
+            if (this.scanner.hasNextInt()){
+                age = this.scanner.nextInt();
+            } else {
+                System.out.println("You can only enter numbers for your age.");
+                scanner.next();
+            }
+
+        }
+        this.player = new Player(name, age);
     }
 
     /**
      *
      */
-    public void initRooms() {
+    private void initRooms() {
 
         Room garden = new Room("Garden", "The King's Garden. A very pleasant place.");
         Room throneRoom = new Room("Throne Room", "The kining is awaiting you.");
@@ -146,7 +178,7 @@ public class Zork {
 
                         }
                         command = commands.poll();
-                        
+
                         if (command.equals(Command.ALL)) {
                             this.currentRoom.getItems().forEach((item) -> {
                                 System.out.println(item.getName() + " added to your inventory.");
@@ -214,7 +246,6 @@ public class Zork {
     public static void main(String[] args) {
 
         Zork game = new Zork();
-        game.initRooms();
         game.run();
 
     }

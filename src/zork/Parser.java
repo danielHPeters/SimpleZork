@@ -17,10 +17,11 @@ public class Parser {
 
     /**
      *
+     * @param scanner
      */
-    public Parser() {
+    public Parser(Scanner scanner) {
 
-        this.scanner = new Scanner(System.in);
+        this.scanner = scanner;
 
     }
 
