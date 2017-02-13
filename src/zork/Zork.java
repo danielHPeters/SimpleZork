@@ -93,7 +93,7 @@ public class Zork {
 
         this.loop.start();
 
-        while (this.loop.isRunning()) {
+        while (this.loop.isRunning() && this.player.isAlive()) {
 
             System.out.println("You are in the " + this.currentRoom.getName());
 
@@ -153,16 +153,21 @@ public class Zork {
                         this.player.showInventory();
                         break;
                     case USE:
-                        this.player.getInventory().forEach(item->{
+                        this.player.getInventory().forEach(item -> {
                             this.player.useItem(item);
                         });
                         break;
                     case STATS:
                         this.player.displayStats();
                         break;
+                    case MASOCHIST:
+                        double selfDamage = 80;
+                        System.out.println("You hit yourself with a bludgeon. You take " + selfDamage + " damage.");
+                        this.player.takeDamage(selfDamage);
+                        break;
                     default:
                         System.out.println("I don't understand that command.");
-                        
+
                 }
 
             }

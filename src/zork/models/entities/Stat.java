@@ -55,7 +55,11 @@ public class Stat {
      * @param subtract 
      */
     public void decrease(double subtract){
-        this.value -= subtract;
+        
+        // Check because armor could make damage negative (which would heal char)
+        if (subtract > 0){
+            this.value -= subtract;
+        }
     }
     
 }

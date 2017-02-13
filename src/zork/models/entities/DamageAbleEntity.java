@@ -32,8 +32,11 @@ public class DamageAbleEntity extends Entity implements IDamageable {
      */
     @Override
     public void takeDamage(double damage) {
-
-        //this.health = this.health - (damage - this.armor);
+        
+        this.stats.get(EStats.HEALTH).decrease(damage - this.stats.get(EStats.ARMOR).getValue());
+        if (this.stats.get(EStats.HEALTH).getValue() <= 0){
+            this.die();
+        }
 
     }
 

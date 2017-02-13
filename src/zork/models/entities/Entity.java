@@ -8,6 +8,11 @@ import java.util.Map;
  * @author d.peters
  */
 public class Entity {
+    
+    /**
+     * 
+     */
+    private boolean alive;
 
     /**
      *
@@ -31,6 +36,7 @@ public class Entity {
      */
     public Entity(String name, int age) {
 
+        this.alive = true;
         this.name = name;
         this.age = age;
         this.stats = new EnumMap<>(EStats.class);
@@ -60,6 +66,28 @@ public class Entity {
     public Map<EStats, Stat> getStats() {
         return stats;
     }
+    
+    /**
+     * 
+     */
+    public void die(){
+        this.alive = false;
+        System.out.println(this.name + " died.");
+    }
+    
+    public void resurrect(){
+        if (!this.alive){
+            this.alive = true;
+            System.out.println(this.name + " resurrected.");
+        } else {
+            System.out.println("You can't resurrect an alive person you dummy!");
+        }
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+    
     
 
 }

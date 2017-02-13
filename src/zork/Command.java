@@ -18,7 +18,8 @@ public enum Command {
     ALL("Pick up all items when combined with take."),
     INVENTORY("Display items in your inventory."),
     USE ("Use an item."),
-    STATS("Shows player stats.");
+    STATS("Shows player stats."),
+    MASOCHIST("You enjoy hitting yourself eh?");
     
     private final String details;
 
