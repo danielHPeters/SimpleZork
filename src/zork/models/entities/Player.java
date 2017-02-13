@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zork.models.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import zork.interfaces.Useable;
 import zork.models.items.Item;
 
 /**
@@ -40,6 +36,9 @@ public class Player extends Entity {
         return inventory;
     }
 
+    /**
+     *
+     */
     public void showInventory() {
 
         if (this.inventory.isEmpty()) {
@@ -52,6 +51,20 @@ public class Player extends Entity {
                         + " - Price: " + item.getPrice()
                 );
             });
+        }
+    }
+
+    /**
+     * Use an item if it is of type Usable
+     *
+     * @param item
+     */
+    public void useItem(Item item) {
+
+        if (item instanceof Useable) {
+            System.out.println(item.getName() + " used.");
+        } else {
+            System.out.println("You can't use the " + item.getName() + ".");
         }
     }
 

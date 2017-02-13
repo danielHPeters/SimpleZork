@@ -40,26 +40,50 @@ public class Item {
 
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * 
+     * @param name 
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * 
+     * @param description 
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * 
+     * @param price 
+     */
     public void setPrice(double price) {
         this.price = price;
     }

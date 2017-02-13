@@ -6,6 +6,7 @@ import java.util.Queue;
 import zork.models.Room;
 import zork.models.entities.Player;
 import zork.models.items.Item;
+import zork.models.items.UsableItem;
 
 /**
  *
@@ -61,7 +62,7 @@ public class Zork {
         Room kitchen = new Room("Kitchen", "You smell a steak sizzling on a fire.");
 
         Item shovel = new Item("shovel", "A rusty shovel", 1);
-        Item bucket = new Item("bucket", "It has a hole in it.", 0);
+        Item bucket = new UsableItem("bucket", "It has a hole in it.", 0);
 
         garden.setExits(null, null, throneRoom, null);
         throneRoom.setExits(garden, null, diningRoom, armory);
@@ -150,6 +151,12 @@ public class Zork {
                         break;
                     case INVENTORY:
                         this.player.showInventory();
+                        break;
+                    case USE:
+                        this.player.getInventory().forEach(item->{
+                            this.player.useItem(item);
+                        });
+                        
                 }
 
             }
