@@ -1,38 +1,49 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package zork;
+
+import zork.enums.EItem;
+import zork.enums.EPreposition;
+import zork.enums.EVerbs;
 
 /**
  *
  * @author Daniel
  */
-public enum Command {
-    
-    GO("Combine with a direction to go somewhere."),
-    DESCRIBE("Get the descrition of the current room."),
-    HELP("Summon this help menu"),
-    QUIT("Exits the game."),
-    NORTH("Your character goes north if your previous command was GO."),
-    SOUTH("Your character goes south if your previous command was GO."),
-    EAST("Your character goes east if your previous command was GO."),
-    WEST("Your character goes west if your previous command was GO."),
-    TAKE("Take an item which you need to specify afterwards."),
-    ALL("Pick up all items when combined with take."),
-    INVENTORY("Display items in your inventory."),
-    USE ("Use an item."),
-    STATS("Shows player stats."),
-    MASOCHIST("You enjoy hitting yourself eh?"),
-    AXE("Use axe."),
-    BUCKET("Use bucket"),
-    SHOVEL("Use schovel"),
-    WOOD("???"),
-    UNDEFINED("This is only for internal use.");
-    
-    private final String details;
+public class Command {
 
-    Command(String det) {
-        details = det;
+    /**
+     * *
+     *
+     */
+    private EVerbs verb;
+
+    /**
+     *
+     */
+    private EItem subject;
+
+    /**
+     *
+     */
+    private EPreposition preposition;
+
+    /**
+     *
+     */
+    private EItem object;
+
+    /**
+     * 
+     * @param verb
+     * @param subject 
+     */
+    public Command(EVerbs verb, EItem subject) {
+        this.verb = verb;
+        this.subject = subject;
     }
-    
-    String getDetails(){
-        return details;
-    }
+
 }

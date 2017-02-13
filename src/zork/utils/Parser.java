@@ -1,8 +1,9 @@
-package zork;
+package zork.utils;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import zork.enums.EVerbs;
 
 /**
  *
@@ -29,9 +30,9 @@ public class Parser {
      *
      * @return 
      */
-    public Queue<Command> getCommand() {
+    public Queue<EVerbs> getCommand() {
 
-        Queue<Command> commands = new LinkedList<>();
+        Queue<EVerbs> commands = new LinkedList<>();
         String userCommand = scanner.nextLine().toUpperCase();
         String[] foundWords = userCommand.split(" ");
 
@@ -39,11 +40,11 @@ public class Parser {
 
             try {
                 
-                Command value = Command.valueOf(word);
+                EVerbs value = EVerbs.valueOf(word);
                 commands.add(value);
                 
             } catch (IllegalArgumentException e) {
-                commands.add(Command.UNDEFINED);
+                commands.add(EVerbs.UNDEFINED);
             }
 
         }

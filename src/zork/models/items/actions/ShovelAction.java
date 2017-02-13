@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zork.models.items;
+package zork.models.items.actions;
 
 import zork.interfaces.IUseable;
 

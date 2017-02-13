@@ -1,4 +1,4 @@
-package zork.models.items;
+package zork.models.items.actions;
 
 import zork.interfaces.IUseable;
 import zork.models.entities.Player;
@@ -7,7 +7,7 @@ import zork.models.entities.Player;
  *
  * @author d.peters
  */
-public class Wood implements IUseable {
+public class WoodAction implements IUseable {
 
     /**
      *
@@ -18,7 +18,7 @@ public class Wood implements IUseable {
      *
      * @param player
      */
-    public Wood(Player player) {
+    public WoodAction(Player player) {
         this.player = player;
     }
 

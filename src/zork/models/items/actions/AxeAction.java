@@ -1,4 +1,4 @@
-package zork.models.items;
+package zork.models.items.actions;
 
 import zork.interfaces.IUseable;
 

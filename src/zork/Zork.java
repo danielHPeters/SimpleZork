@@ -1,5 +1,9 @@
 package zork;
 
+import zork.engine.ZorkLoop;
+import zork.enums.EItem;
+import zork.enums.EVerbs;
+import zork.utils.Parser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
@@ -7,10 +11,10 @@ import java.util.Scanner;
 import zork.models.Room;
 import zork.models.entities.EStats;
 import zork.models.entities.Player;
-import zork.models.items.AxeAction;
+import zork.models.items.actions.AxeAction;
 import zork.models.items.Item;
-import zork.models.items.ShovelAction;
-import zork.models.items.Wood;
+import zork.models.items.actions.ShovelAction;
+import zork.models.items.actions.WoodAction;
 
 /**
  *
@@ -107,7 +111,7 @@ public class Zork {
         Item shovel = new Item("shovel", "A rusty shovel", 1, new ShovelAction());
         Item bucket = new Item("bucket", "It has a hole in it.", 0);
         Item axe = new Item("axe", "A dangerous looking weapon.", 10, new AxeAction());
-        Item wood = new Item("wood", "???", 100000, new Wood(this.player));
+        Item wood = new Item("wood", "???", 100000, new WoodAction(this.player));
 
         garden.setExits(null, null, throneRoom, null);
         throneRoom.setExits(garden, null, diningRoom, armory);
@@ -146,11 +150,11 @@ public class Zork {
 
             System.out.println("What do you want to do?");
 
-            Queue<Command> commands = parser.getCommand();
+            Queue<EVerbs> commands = parser.getCommand();
 
             while (!commands.isEmpty()) {
 
-                Command command = commands.poll();
+                EVerbs command = commands.poll();
 
                 switch (command) {
                     case HELP:
@@ -188,7 +192,7 @@ public class Zork {
                         }
                         command = commands.poll();
 
-                        if (command.equals(Command.ALL)) {
+                        if (command.equals(EVerbs.ALL)) {
                             this.currentRoom.getItems().forEach((item) -> {
                                 System.out.println("\n" + item.getName() + " added to your inventory.");
                                 this.player.getInventory().add(item);
@@ -208,7 +212,7 @@ public class Zork {
                         }
                         command = commands.poll();
 
-                        if (command.equals(Command.ALL)) {
+                        if (command.equals(EVerbs.ALL)) {
 
                             this.player.getInventory().forEach(item -> {
                                 item.use();
@@ -265,7 +269,7 @@ public class Zork {
      */
     public void showHelp() {
 
-        for (Command c : Command.values()) {
+        for (EVerbs c : EVerbs.values()) {
             System.out.println(c + " - " + c.getDetails());
         }
 

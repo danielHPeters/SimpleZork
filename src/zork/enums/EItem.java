@@ -1,4 +1,4 @@
-package zork;
+package zork.enums;
 
 /**
  * Enum to lists items available in the game. Used for checking user input when

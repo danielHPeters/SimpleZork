@@ -2,7 +2,7 @@ package zork.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import zork.Command;
+import zork.enums.EVerbs;
 import zork.models.items.Item;
 
 /**
@@ -83,7 +83,7 @@ public class Room {
      * @param direction 
      * @return  
      */
-    public Room goToNextRoom(Command direction){
+    public Room goToNextRoom(EVerbs direction){
         
         Room room = this;
         
