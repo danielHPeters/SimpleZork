@@ -5,20 +5,21 @@ import java.util.List;
 import zork.models.items.Item;
 
 /**
+ * Ingame Representation of players.
  *
  * @author d.peters
  */
 public class Player extends DamageAbleEntity {
 
     /**
-     *
+     * The inventory of the player.
      */
     private final List<Item> inventory;
 
     /**
-     *
-     * @param name
-     * @param age
+     * Default constructor. Initializes name and age of player.
+     * @param name player name
+     * @param age age of the player
      */
     public Player(String name, int age) {
         super(name, age, new Stat(100, 0, 200), new Stat(5, 0, 100));
@@ -27,7 +28,7 @@ public class Player extends DamageAbleEntity {
     }
 
     /**
-     *
+     * Getter for the player inventory.
      * @return
      */
     public List<Item> getInventory() {
@@ -35,7 +36,7 @@ public class Player extends DamageAbleEntity {
     }
 
     /**
-     *
+     * List all items in this players inventory.
      */
     public void showInventory() {
 
@@ -53,20 +54,10 @@ public class Player extends DamageAbleEntity {
     }
 
     /**
-     * Use an item if it is of type Usable
-     *
-     * @param item
-     */
-    public void useItem(Item item) {
-
-        item.use();
-    }
-    
-    /**
      * Display all stats of this player
      */
-    public void displayStats(){
-        this.stats.forEach((eStat, stat)->{
+    public void displayStats() {
+        this.stats.forEach((eStat, stat) -> {
             System.out.println(eStat + ": " + stat.getValue());
         });
     }

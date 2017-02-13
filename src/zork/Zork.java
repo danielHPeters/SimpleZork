@@ -18,12 +18,15 @@ import zork.models.items.Wood;
  */
 public class Zork {
 
-    private Scanner scanner;
+    /**
+     * Scanner to scan user input from console.
+     */
+    private final Scanner scanner;
 
     /**
-     *
+     * The parser object to parse input commands.
      */
-    private Parser parser;
+    private final Parser parser;
 
     /**
      * Current location of the player
@@ -36,17 +39,18 @@ public class Zork {
     private List<Room> rooms;
 
     /**
-     *
+     * The player object
      */
     private Player player;
 
     /**
-     *
+     * The loop that starts and ends the game.
      */
-    private ZorkLoop loop;
+    private final ZorkLoop loop;
 
     /**
-     *
+     * Default constructor. Initializes the scanner object, the loop to start
+     * and end the game as well the Parser and the actual game objects
      */
     public Zork() {
 
@@ -58,6 +62,9 @@ public class Zork {
 
     }
 
+    /**
+     * Initializes the player object. Asks the user to submit name and age.
+     */
     private void initPlayer() {
 
         String name = null;
@@ -72,7 +79,7 @@ public class Zork {
         }
 
         System.out.println("How Old are you?");
-        do  {
+        do {
 
             if (this.scanner.hasNextInt()) {
                 age = this.scanner.nextInt();
@@ -87,7 +94,7 @@ public class Zork {
     }
 
     /**
-     *
+     * Initializes all the rooms and the items in them.
      */
     private void initRooms() {
 
@@ -125,7 +132,7 @@ public class Zork {
     }
 
     /**
-     *
+     * Main process that executes the command actions.
      */
     public void run() {
 
@@ -135,7 +142,7 @@ public class Zork {
 
         while (this.loop.isRunning() && this.player.isAlive()) {
 
-            System.out.println("You are in the " + this.currentRoom.getName());
+            System.out.println("\nYou are in the " + this.currentRoom.getName() + ".");
 
             System.out.println("What do you want to do?");
 
@@ -156,7 +163,7 @@ public class Zork {
                     case GO:
                         if (commands.isEmpty()) {
 
-                            System.out.println("Where do you want to go?");
+                            System.out.println("\nWhere do you want to go?");
                             commands = this.parser.getCommand();
 
                         }
@@ -166,7 +173,7 @@ public class Zork {
                         if (nextRoom != null) {
                             this.currentRoom = nextRoom;
                         } else {
-                            System.out.println("You walked into a wall...");
+                            System.out.println("\nYou walked into a wall...");
                         }
                         break;
                     case DESCRIBE:
@@ -175,7 +182,7 @@ public class Zork {
                     case TAKE:
                         if (commands.isEmpty()) {
 
-                            System.out.println("Take what?");
+                            System.out.println("\nTake what?");
                             commands = this.parser.getCommand();
 
                         }
@@ -183,7 +190,7 @@ public class Zork {
 
                         if (command.equals(Command.ALL)) {
                             this.currentRoom.getItems().forEach((item) -> {
-                                System.out.println(item.getName() + " added to your inventory.");
+                                System.out.println("\n" + item.getName() + " added to your inventory.");
                                 this.player.getInventory().add(item);
                             });
                             this.currentRoom.getItems().clear();
@@ -195,7 +202,7 @@ public class Zork {
                     case USE:
                         if (commands.isEmpty()) {
 
-                            System.out.println("Use what?");
+                            System.out.println("\nUse what?");
                             commands = this.parser.getCommand();
 
                         }
@@ -204,7 +211,7 @@ public class Zork {
                         if (command.equals(Command.ALL)) {
 
                             this.player.getInventory().forEach(item -> {
-                                this.player.useItem(item);
+                                item.use();
                             });
                         } else {
 
@@ -224,11 +231,11 @@ public class Zork {
                         break;
                     case MASOCHIST:
                         double selfDamage = this.player.getStats().get(EStats.ATTACK).getValue();
-                        System.out.println("You hit yourself with a bludgeon. You take " + selfDamage + " damage.");
+                        System.out.println("\nYou hit yourself with a bludgeon. You take " + selfDamage + " damage.");
                         this.player.takeDamage(selfDamage);
                         break;
                     default:
-                        System.out.println("I don't understand that command.");
+                        System.out.println("\nI don't understand that command.");
 
                 }
 
@@ -250,11 +257,11 @@ public class Zork {
      * Message printed when the player quits the game
      */
     public void goodbyeMessage() {
-        System.out.println("See you again soon " + this.player.getName() + "!");
+        System.out.println("\nSee you again soon " + this.player.getName() + "!");
     }
 
     /**
-     * List the Command available
+     * List the commands available
      */
     public void showHelp() {
 

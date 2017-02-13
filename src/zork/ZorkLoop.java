@@ -7,12 +7,12 @@ package zork;
 public class ZorkLoop {
     
     /**
-     * 
+     * Boolean flag to test if the game loop is to be ended.
      */
     private boolean running;
 
     /**
-     * 
+     * Check if the loop has been ended.
      * @return 
      */
     public boolean isRunning() {

@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zork;
 
 /**
+ * Enum to lists items available in the game. Used for checking user input when
+ * using or taking items
  *
  * @author Daniel
  */
