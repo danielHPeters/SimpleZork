@@ -63,17 +63,17 @@ public class Zork {
         int age = 0;
 
         System.out.println("What's your name?");
-        
+
         while (name == null) {
 
-                name = this.scanner.nextLine();
+            name = this.scanner.nextLine();
 
         }
 
         System.out.println("How Old are you?");
         while (age <= 0) {
 
-            if (this.scanner.hasNextInt()){
+            if (this.scanner.hasNextInt()) {
                 age = this.scanner.nextInt();
             } else {
                 System.out.println("You can only enter numbers for your age.");
@@ -191,9 +191,31 @@ public class Zork {
                         this.player.showInventory();
                         break;
                     case USE:
-                        this.player.getInventory().forEach(item -> {
-                            this.player.useItem(item);
-                        });
+                        if (commands.isEmpty()) {
+
+                            System.out.println("Use what?");
+                            commands = this.parser.getCommand();
+
+                        }
+                        command = commands.poll();
+
+                        if (command.equals(Command.ALL)) {
+
+                            this.player.getInventory().forEach(item -> {
+                                this.player.useItem(item);
+                            });
+                        } else {
+
+                            for (EItem item : EItem.values()) {
+                                if (EItem.valueOf(command.toString()).equals(item)) {
+                                    this.player.getInventory().forEach(itm->{
+                                        if(itm.getName().toUpperCase().equals(item.toString())){
+                                            itm.use();
+                                        }
+                                    });
+                                }
+                            } 
+                        }
                         break;
                     case STATS:
                         this.player.displayStats();

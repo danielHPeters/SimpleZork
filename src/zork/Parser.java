@@ -43,7 +43,7 @@ public class Parser {
                 commands.add(value);
                 
             } catch (IllegalArgumentException e) {
-                
+    
             }
 
         }

@@ -19,7 +19,11 @@ public enum Command {
     INVENTORY("Display items in your inventory."),
     USE ("Use an item."),
     STATS("Shows player stats."),
-    MASOCHIST("You enjoy hitting yourself eh?");
+    MASOCHIST("You enjoy hitting yourself eh?"),
+    AXE("Use axe."),
+    BUCKET("Use bucket"),
+    SHOVEL("Use schovel"),
+    WOOD("???");
     
     private final String details;
 
