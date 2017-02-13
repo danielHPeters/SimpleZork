@@ -1,5 +1,7 @@
 package zork.models.entities;
 
+import zork.models.entities.base.Stat;
+import zork.models.entities.base.DamageAbleEntity;
 import java.util.ArrayList;
 import java.util.List;
 import zork.models.items.Item;

@@ -1,5 +1,8 @@
 package zork.models.entities;
 
+import zork.models.entities.base.Stat;
+import zork.models.entities.base.DamageAbleEntity;
+
 /**
  *
  * @author d.peters

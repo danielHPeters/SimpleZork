@@ -1,5 +1,6 @@
-package zork.models.entities;
+package zork.models.entities.base;
 
+import zork.enums.EStats;
 import zork.interfaces.IDamageable;
 
 /**

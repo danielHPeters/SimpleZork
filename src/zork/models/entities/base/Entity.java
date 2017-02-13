@@ -1,5 +1,6 @@
-package zork.models.entities;
+package zork.models.entities.base;
 
+import zork.enums.EStats;
 import java.util.EnumMap;
 import java.util.Map;
 import zork.interfaces.IMoveable;

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 import zork.models.Room;
-import zork.models.entities.EStats;
+import zork.enums.EStats;
 import zork.models.entities.Player;
 import zork.models.items.actions.AxeAction;
 import zork.models.items.Item;
