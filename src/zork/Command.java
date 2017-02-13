@@ -23,7 +23,8 @@ public enum Command {
     AXE("Use axe."),
     BUCKET("Use bucket"),
     SHOVEL("Use schovel"),
-    WOOD("???");
+    WOOD("???"),
+    UNDEFINED("This is only for internal use.");
     
     private final String details;
 
