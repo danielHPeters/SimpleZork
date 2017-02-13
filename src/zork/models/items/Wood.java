@@ -7,28 +7,34 @@ import zork.models.entities.Player;
  *
  * @author d.peters
  */
-public class Wood implements IUseable{
+public class Wood implements IUseable {
 
     /**
-     * 
+     *
      */
     private Player player;
-    
+
     /**
-     * 
-     * @param player 
+     *
+     * @param player
      */
-    public Wood(Player player){
+    public Wood(Player player) {
         this.player = player;
     }
-    
+
     /**
-     * 
+     *
      */
     @Override
     public void use() {
-        System.out.println("You cannot use wood! Wood uses you, stupid!");
-        this.player.die();
+
+        if (player.getName().equals("Chuck Norris")) {
+            System.out.println("Well played, well played...");
+        } else {
+            System.out.println("You cannot use wood! Wood uses you, stupid!");
+            this.player.die();
+        }
+
     }
-    
+
 }

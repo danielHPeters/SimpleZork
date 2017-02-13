@@ -71,16 +71,17 @@ public class Zork {
         }
 
         System.out.println("How Old are you?");
-        while (age <= 0) {
+        do  {
 
             if (this.scanner.hasNextInt()) {
                 age = this.scanner.nextInt();
             } else {
                 System.out.println("You can only enter numbers for your age.");
-                scanner.next();
+                this.scanner.next();
             }
 
-        }
+        } while (age <= 0);
+        this.scanner.nextLine();
         this.player = new Player(name, age);
     }
 
@@ -208,13 +209,13 @@ public class Zork {
 
                             for (EItem item : EItem.values()) {
                                 if (EItem.valueOf(command.toString()).equals(item)) {
-                                    this.player.getInventory().forEach(itm->{
-                                        if(itm.getName().toUpperCase().equals(item.toString())){
+                                    this.player.getInventory().forEach(itm -> {
+                                        if (itm.getName().toUpperCase().equals(item.toString())) {
                                             itm.use();
                                         }
                                     });
                                 }
-                            } 
+                            }
                         }
                         break;
                     case STATS:
