@@ -28,11 +28,21 @@ public class Wood implements IUseable {
     @Override
     public void use() {
 
-        if (player.getName().equals("Chuck Norris")) {
-            System.out.println("Well played, well played...");
-        } else {
-            System.out.println("You cannot use wood! Wood uses you, stupid!");
-            this.player.die();
+        switch (player.getName()) {
+            case "Chuck Norris":
+                System.out.println("Well played, well played...");
+                break;
+            case "John Cena":
+                System.out.println("Whatever. You win, stupid!");
+                break;
+            default:
+                if (player.getName().equals("Wood")){
+                    
+                    System.out.println("Nice try, stupid!");
+                } else {
+                    System.out.println("You cannot use wood! Wood uses you, stupid!");
+                }   this.player.die();
+                break;
         }
 
     }

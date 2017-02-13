@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zork.models.entities;
 
 import zork.interfaces.IDamageable;
@@ -21,7 +16,7 @@ public abstract class DamageAbleEntity extends Entity implements IDamageable {
      * @param armor
      */
     public DamageAbleEntity(String name, int age, Stat health, Stat armor) {
-        super(name, age);
+        super(name, age, new Stat(20, 0, 1000));
         this.stats.put(EStats.HEALTH, health);
         this.stats.put(EStats.ARMOR, armor);
     }

@@ -10,5 +10,5 @@ package zork.models.entities;
  * @author d.peters
  */
 public enum EStats {
-    HEALTH, ARMOR, STRENGTH;
+    HEALTH, ARMOR, ATTACK;
 }

@@ -34,13 +34,15 @@ public abstract class Entity implements IMoveable{
      *
      * @param name
      * @param age
+     * @param attack
      */
-    public Entity(String name, int age) {
+    public Entity(String name, int age, Stat attack) {
 
         this.alive = true;
         this.name = name;
         this.age = age;
         this.stats = new EnumMap<>(EStats.class);
+        this.stats.put(EStats.ATTACK, attack);
 
     }
 

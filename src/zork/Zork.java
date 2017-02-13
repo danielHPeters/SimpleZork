@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 import zork.models.Room;
+import zork.models.entities.EStats;
 import zork.models.entities.Player;
 import zork.models.items.AxeAction;
 import zork.models.items.Item;
@@ -222,7 +223,7 @@ public class Zork {
                         this.player.displayStats();
                         break;
                     case MASOCHIST:
-                        double selfDamage = 80;
+                        double selfDamage = this.player.getStats().get(EStats.ATTACK).getValue();
                         System.out.println("You hit yourself with a bludgeon. You take " + selfDamage + " damage.");
                         this.player.takeDamage(selfDamage);
                         break;
