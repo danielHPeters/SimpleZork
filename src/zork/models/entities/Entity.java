@@ -1,5 +1,8 @@
 package zork.models.entities;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 /**
  *
  * @author d.peters
@@ -10,6 +13,11 @@ public class Entity {
      *
      */
     private String name;
+    
+    /**
+     * 
+     */
+    protected Map<EStats,Stat> stats;
 
     /**
      *
@@ -25,6 +33,7 @@ public class Entity {
 
         this.name = name;
         this.age = age;
+        this.stats = new EnumMap<>(EStats.class);
 
     }
 
@@ -43,5 +52,14 @@ public class Entity {
     public int getAge() {
         return age;
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public Map<EStats, Stat> getStats() {
+        return stats;
+    }
+    
 
 }

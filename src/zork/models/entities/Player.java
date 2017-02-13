@@ -2,19 +2,19 @@ package zork.models.entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import zork.interfaces.Useable;
 import zork.models.items.Item;
+import zork.interfaces.IUseable;
 
 /**
  *
  * @author d.peters
  */
-public class Player extends Entity {
+public class Player extends DamageAbleEntity {
 
     /**
      *
      */
-    private List<Item> inventory;
+    private final List<Item> inventory;
 
     /**
      *
@@ -22,8 +22,7 @@ public class Player extends Entity {
      * @param age
      */
     public Player(String name, int age) {
-
-        super(name, age);
+        super(name, age, new Stat(100, 0, 200), new Stat(5, 0, 100));
         this.inventory = new ArrayList<>();
 
     }
@@ -61,11 +60,20 @@ public class Player extends Entity {
      */
     public void useItem(Item item) {
 
-        if (item instanceof Useable) {
+        if (item instanceof IUseable) {
             System.out.println(item.getName() + " used.");
         } else {
             System.out.println("You can't use the " + item.getName() + ".");
         }
+    }
+    
+    /**
+     * Display all stats of this player
+     */
+    public void displayStats(){
+        this.stats.forEach((eStat, stat)->{
+            System.out.println(eStat + ": " + stat.getValue());
+        });
     }
 
 }

@@ -156,6 +156,12 @@ public class Zork {
                         this.player.getInventory().forEach(item->{
                             this.player.useItem(item);
                         });
+                        break;
+                    case STATS:
+                        this.player.displayStats();
+                        break;
+                    default:
+                        System.out.println("I don't understand that command.");
                         
                 }
 

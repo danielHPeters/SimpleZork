@@ -17,7 +17,8 @@ public enum Command {
     TAKE("Take an item which you need to specify afterwards."),
     ALL("Pick up all items when combined with take."),
     INVENTORY("Display items in your inventory."),
-    USE ("Use an item");
+    USE ("Use an item."),
+    STATS("Shows player stats.");
     
     private final String details;
 
