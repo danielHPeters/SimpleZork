@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package zork.models.entities.base;
 
 /**
@@ -26,6 +21,12 @@ public class Stat {
      */
     private double maxValue;
     
+    /**
+     * 
+     * @param value
+     * @param minValue
+     * @param maxValue 
+     */
     public Stat(double value, double minValue, double maxValue){
         this.value = value;
         this.minValue = minValue;

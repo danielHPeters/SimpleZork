@@ -1,15 +1,12 @@
 package zork;
 
 import zork.engine.ZorkLoop;
-import zork.enums.EItem;
 import zork.enums.EVerbs;
 import zork.utils.Parser;
 import java.util.Queue;
 import java.util.Scanner;
-import zork.models.Room;
-import zork.enums.EStats;
-import zork.models.entities.Npc;
-import zork.models.entities.base.DamageAbleEntity;
+import zork.generators.MapGenerator;
+import zork.generators.PlayerGenerator;
 
 /**
  *
@@ -31,11 +28,26 @@ public class Zork {
      * The loop that starts and ends the game.
      */
     private final ZorkLoop loop;
+    
+    /**
+     * 
+     */
+    private final PlayerGenerator pGen;
+    
+    /**
+     * 
+     */
+    private final MapGenerator mGen;
 
     /**
      *
      */
     private final GameState game;
+    
+    /**
+     * 
+     */
+    private final ZorkActions actions;
 
     /**
      * Default constructor. Initializes the scanner object, the loop to start
@@ -46,126 +58,16 @@ public class Zork {
         this.scanner = new Scanner(System.in);
         this.loop = new ZorkLoop();
         this.parser = new Parser(this.scanner);
-        this.game = new GameState(this.scanner);
+        this.pGen = new PlayerGenerator(this.scanner);
+        this.game = new GameState(this.pGen.createPlayer());
+        this.mGen = new MapGenerator();
+        this.game.setRooms(this.mGen.createRooms(this.game.getPlayer()));
+        this.game.setCurrentRoom(this.game.getRooms().get(3));
+        this.actions = new ZorkActions(this.parser, this.game);
 
     }
 
-    /**
-     *
-     * @param commands
-     */
-    public void specifyDirection(Queue<EVerbs> commands) {
-        EVerbs command;
-        if (commands.isEmpty()) {
-
-            System.out.println("\nWhere do you want to go?");
-            commands = this.parser.getCommand();
-
-        }
-        command = commands.poll();
-        Room nextRoom = this.game.getCurrentRoom().goToNextRoom(command);
-
-        if (nextRoom != null) {
-            this.game.setCurrentRoom(nextRoom);
-        } else {
-            System.out.println("\nYou walked into a wall...");
-        }
-    }
-
-    /**
-     *
-     * @param commands
-     */
-    public void specifyObject(Queue<EVerbs> commands) {
-        EVerbs command;
-
-        if (commands.isEmpty()) {
-
-            System.out.println("\nTake what?");
-            commands = this.parser.getCommand();
-
-        }
-        command = commands.poll();
-
-        if (command.equals(EVerbs.ALL)) {
-
-            this.game.getCurrentRoom().getItems().forEach((item) -> {
-                System.out.println(
-                        "\n" + item.getName() + " added to your inventory."
-                );
-
-                this.game.getPlayer().getInventory().add(item);
-            });
-            this.game.getCurrentRoom().getItems().clear();
-        }
-    }
-
-    public void specifyItem(Queue<EVerbs> commands) {
-        EVerbs command;
-
-        if (commands.isEmpty()) {
-
-            System.out.println("\nUse what?");
-            commands = this.parser.getCommand();
-
-        }
-        command = commands.poll();
-
-        if (command.equals(EVerbs.ALL)) {
-
-            this.game.getPlayer().getInventory().forEach(item -> {
-                item.use();
-            });
-        } else {
-            for (EItem item : EItem.values()) {
-                if (EItem.valueOf(command.toString()).equals(item)) {
-                    this.game.getPlayer().getInventory().forEach(itm -> {
-                        if (itm.getName().toUpperCase().equals(item.toString())) {
-                            itm.use();
-                        }
-                    });
-                }
-            }
-        }
-    }
-
-    /**
-     *
-     */
-    public void masochistAction() {
-        double selfDamage = this.game.getPlayer().getStats().get(EStats.ATTACK).getValue();
-        System.out.println("\nYou hit yourself with a bludgeon.");
-        this.game.getPlayer().takeDamage(selfDamage);
-    }
-
-    /**
-     *
-     */
-    public void attackAction() {
-        if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
-            if (this.game.getCurrentRoom().getCharacters().get(0) instanceof DamageAbleEntity) {
-
-                DamageAbleEntity dmgChar = (DamageAbleEntity) this.game.getCurrentRoom().getCharacters().get(0);
-                dmgChar.takeDamage(this.game.getPlayer().getStats().
-                        get(EStats.ATTACK).getValue());
-            }
-        }
-    }
-
-    /**
-     *
-     */
-    public void npcGreetings() {
-        if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
-            System.out.println("There is somebody in the room...");
-            this.game.getCurrentRoom().getCharacters().forEach(character -> {
-                if (character instanceof Npc) {
-                    Npc ch = (Npc) character;
-                    ch.salutation();
-                }
-            });
-        }
-    }
+    
 
     /**
      *
@@ -175,35 +77,35 @@ public class Zork {
         EVerbs command = commands.poll();
         switch (command) {
             case HELP:
-                showHelp();
+                this.actions.showHelp();
                 break;
             case QUIT:
-                goodbyeMessage();
+                this.actions.goodbyeMessage();
                 this.loop.quit();
                 break;
             case GO:
-                specifyDirection(commands);
+                this.actions.specifyDirection(commands);
                 break;
             case DESCRIBE:
-                System.out.println(this.game.getCurrentRoom().getDescription());
+                this.actions.roomDescription();
                 break;
             case TAKE:
-                specifyObject(commands);
+                this.actions.specifyObject(commands);
                 break;
             case INVENTORY:
                 this.game.getPlayer().showInventory();
                 break;
             case USE:
-                specifyItem(commands);
+                this.actions.specifyItem(commands);
                 break;
             case STATS:
                 this.game.getPlayer().displayStats();
                 break;
             case MASOCHIST:
-                masochistAction();
+                this.actions.masochistAction();
                 break;
             case ATTACK:
-                attackAction();
+                this.actions.attackAction();
                 break;
             default:
                 System.out.println("\nI don't understand that command.");
@@ -216,15 +118,15 @@ public class Zork {
      */
     public void run() {
 
-        welcomeMessage();
+        this.actions.welcomeMessage();
 
         this.loop.start();
 
         while (this.loop.isRunning() && this.game.getPlayer().isAlive()) {
 
-            System.out.println("\nYou are in the " + this.game.getCurrentRoom().getName() + ".");
+            this.actions.currentRoomMessage();
 
-            npcGreetings();
+            this.actions.npcGreetings();
 
             System.out.println("What do you want to do?");
 
@@ -235,33 +137,6 @@ public class Zork {
                 selectAction(commands);
 
             }
-        }
-
-    }
-
-    /**
-     * Message printed when the player starts the game
-     */
-    public void welcomeMessage() {
-
-        System.out.println("Hail brave " + this.game.getPlayer().getName() + ". Welcome to Zork.");
-
-    }
-
-    /**
-     * Message printed when the player quits the game
-     */
-    public void goodbyeMessage() {
-        System.out.println("\nSee you again soon " + this.game.getPlayer().getName() + "!");
-    }
-
-    /**
-     * List the commands available
-     */
-    public void showHelp() {
-
-        for (EVerbs c : EVerbs.values()) {
-            System.out.println(c + " - " + c.getDetails());
         }
 
     }
