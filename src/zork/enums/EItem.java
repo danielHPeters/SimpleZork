@@ -7,5 +7,5 @@ package zork.enums;
  * @author Daniel
  */
 public enum EItem {
-    AXE, BUCKET, SHOVEL, WOOD;
+    AXE, BUCKET, SHOVEL, NUKA, WOOD, UNDEFINED;
 }

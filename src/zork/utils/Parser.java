@@ -28,7 +28,7 @@ public class Parser {
 
     /**
      *
-     * @return 
+     * @return
      */
     public Queue<EVerbs> getCommand() {
 
@@ -39,25 +39,38 @@ public class Parser {
         for (String word : foundWords) {
 
             try {
-                
+
                 EVerbs value = EVerbs.valueOf(word);
                 commands.add(value);
-                
+
             } catch (IllegalArgumentException e) {
                 commands.add(EVerbs.UNDEFINED);
             }
 
         }
-        
+
         return commands;
 
     }
 
     /**
      *
+     * @return
      */
-    public void parse() {
+    public String[] handleInput() {
+        String userCommand = scanner.nextLine().toUpperCase();
+        String[] foundWords = userCommand.split(" ");
 
+        return foundWords;
+    }
+
+    public void parse() {
+        String[] input = handleInput();
+
+        try {
+            
+        } catch (IllegalArgumentException e) {
+        }
     }
 
 }

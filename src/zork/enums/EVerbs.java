@@ -24,6 +24,7 @@ public enum EVerbs {
     BUCKET("Use bucket"),
     SHOVEL("Use schovel"),
     WOOD("???"),
+    NUKA("!!!!!????"),
     UNDEFINED("This is only for internal use.");
     
     private final String details;

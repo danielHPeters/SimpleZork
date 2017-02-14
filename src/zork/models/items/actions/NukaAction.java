@@ -7,7 +7,7 @@ import zork.models.entities.Player;
  *
  * @author d.peters
  */
-public class WoodAction implements IUseable {
+public class NukaAction implements IUseable {
 
     /**
      *
@@ -18,33 +18,28 @@ public class WoodAction implements IUseable {
      *
      * @param player
      */
-    public WoodAction(Player player) {
+    public NukaAction(Player player) {
         this.player = player;
     }
 
-    /**
-     *
-     */
     @Override
     public void use() {
 
         switch (player.getName()) {
             case "Chuck Norris":
-                System.out.println("\nWell played, well played...");
+                System.out.println("\nThat nuclear fallout was just your fart. Nothing to worry about.");
                 break;
             case "John Cena":
-                System.out.println("\nWhatever. You win, stupid!");
+                System.out.println("\nAnd his name is JOHN CENA NUKER OF WORLDS!!!");
+                break;
+            case "Fallout Guy":
+                System.out.println("\nAfter years of stasis, you finally wake up in Vault 81.");
                 break;
             default:
-                if (player.getName().equals("Wood")){
-                    
-                    System.out.println("\nNice try, stupid!");
-                } else {
-                    System.out.println("\nYou cannot use wood! Wood uses you, stupid!");
-                }   this.player.die();
+                System.out.println("\nYou moron! You obliterated everything!");
+                this.player.die();
                 break;
         }
-
     }
 
 }
