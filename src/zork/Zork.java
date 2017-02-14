@@ -10,7 +10,9 @@ import java.util.Queue;
 import java.util.Scanner;
 import zork.models.Room;
 import zork.enums.EStats;
+import zork.models.entities.Npc;
 import zork.models.entities.Player;
+import zork.models.entities.base.DamageAbleEntity;
 import zork.models.items.actions.AxeAction;
 import zork.models.items.Item;
 import zork.models.items.actions.NukaAction;
@@ -115,6 +117,10 @@ public class Zork {
         Item nuka = new Item("nuka", "!!!!!!!!!???????", 1111111111, new NukaAction(this.player));
         Item wood = new Item("wood", "???", 100000, new WoodAction(this.player));
 
+        Npc king = new Npc("King", 40);
+        Npc cook = new Npc("Cook", 27);
+        Npc wd = new Npc("Wood", 100);
+
         garden.setExits(null, null, throneRoom, null);
         throneRoom.setExits(garden, null, diningRoom, armory);
         armory.setExits(null, throneRoom, null, null);
@@ -126,6 +132,10 @@ public class Zork {
         armory.getItems().add(axe);
         armory.getItems().add(nuka);
         throneRoom.getItems().add(wood);
+
+        throneRoom.getCharacters().add(king);
+        kitchen.getCharacters().add(cook);
+        garden.getCharacters().add(wd);
 
         this.rooms = new ArrayList<>();
         this.rooms.add(garden);
@@ -150,6 +160,16 @@ public class Zork {
         while (this.loop.isRunning() && this.player.isAlive()) {
 
             System.out.println("\nYou are in the " + this.currentRoom.getName() + ".");
+
+            if (!this.currentRoom.getCharacters().isEmpty()) {
+                System.out.println("There is somebody in the room...");
+                this.currentRoom.getCharacters().forEach(character -> {
+                    if (character instanceof Npc) {
+                        Npc ch = (Npc) character;
+                        ch.salutation();
+                    }
+                });
+            }
 
             System.out.println("What do you want to do?");
 
@@ -237,8 +257,17 @@ public class Zork {
                         break;
                     case MASOCHIST:
                         double selfDamage = this.player.getStats().get(EStats.ATTACK).getValue();
-                        System.out.println("\nYou hit yourself with a bludgeon. You take " + selfDamage + " damage.");
+                        System.out.println("\nYou hit yourself with a bludgeon.");
                         this.player.takeDamage(selfDamage);
+                        break;
+                    case ATTACK:
+
+                        if (!this.currentRoom.getCharacters().isEmpty()) {
+                            if (this.currentRoom.getCharacters().get(0) instanceof DamageAbleEntity) {
+                                DamageAbleEntity dmgChar = (DamageAbleEntity) this.currentRoom.getCharacters().get(0);
+                                dmgChar.takeDamage(this.player.getStats().get(EStats.ATTACK).getValue());
+                            }
+                        }
                         break;
                     default:
                         System.out.println("\nI don't understand that command.");

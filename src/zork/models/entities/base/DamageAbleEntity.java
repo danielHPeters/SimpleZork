@@ -28,10 +28,19 @@ public abstract class DamageAbleEntity extends Entity implements IDamageable {
      */
     @Override
     public void takeDamage(double damage) {
-        
-        this.stats.get(EStats.HEALTH).decrease(damage - this.stats.get(EStats.ARMOR).getValue());
-        if (this.stats.get(EStats.HEALTH).getValue() <= 0){
-            this.die();
+
+        if (!this.getName().equals("Wood")) {
+            
+            double actualDamage = damage - this.stats.get(EStats.ARMOR).getValue();
+            
+            this.stats.get(EStats.HEALTH).decrease(actualDamage);
+            System.out.println(this.getName() + " took " + actualDamage + " damage");
+
+            if (this.stats.get(EStats.HEALTH).getValue() <= 0) {
+                this.die();
+            }
+        } else {
+            System.out.println("I am Wood, stupid!");
         }
 
     }

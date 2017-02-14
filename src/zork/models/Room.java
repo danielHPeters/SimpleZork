@@ -3,6 +3,7 @@ package zork.models;
 import java.util.ArrayList;
 import java.util.List;
 import zork.enums.EVerbs;
+import zork.models.entities.base.Entity;
 import zork.models.items.Item;
 
 /**
@@ -45,6 +46,11 @@ public class Room {
      * 
      */
     private List<Item> items;
+    
+    /**
+     * 
+     */
+    private List<Entity> characters;
 
     /**
      * Default constructor. Sets the name and the description of the room
@@ -56,6 +62,8 @@ public class Room {
 
         this.name = name;
         this.description = description;
+        this.items = new ArrayList<>();
+        this.characters = new ArrayList<>();
 
     }
 
@@ -75,6 +83,7 @@ public class Room {
         this.south = south;
         this.west = west;
         this.items = new ArrayList<>();
+        this.characters = new ArrayList<>();
         
     }
     
@@ -122,6 +131,14 @@ public class Room {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public List<Entity> getCharacters() {
+        return characters;
     }
 
     /**

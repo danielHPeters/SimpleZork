@@ -33,6 +33,14 @@ public class Command {
 
     /**
      * 
+     * @param verb 
+     */
+    public Command(EVerbs verb){
+        this.verb = verb;
+    }
+    
+    /**
+     * 
      * @param verb
      * @param subject 
      */

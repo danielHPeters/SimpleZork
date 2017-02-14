@@ -67,6 +67,7 @@ public class Parser {
     public void parse() {
         String[] input = handleInput();
 
+        
         try {
             
         } catch (IllegalArgumentException e) {

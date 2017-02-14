@@ -18,6 +18,7 @@ public enum EVerbs {
     ALL("Pick up all items when combined with take."),
     INVENTORY("Display items in your inventory."),
     USE ("Use an item."),
+    ATTACK("Attack a character."),
     STATS("Shows player stats."),
     MASOCHIST("You enjoy hitting yourself eh?"),
     AXE("Use axe."),
