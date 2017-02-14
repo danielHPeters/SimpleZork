@@ -4,20 +4,12 @@ import zork.engine.ZorkLoop;
 import zork.enums.EItem;
 import zork.enums.EVerbs;
 import zork.utils.Parser;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 import zork.models.Room;
 import zork.enums.EStats;
 import zork.models.entities.Npc;
-import zork.models.entities.Player;
 import zork.models.entities.base.DamageAbleEntity;
-import zork.models.items.actions.AxeAction;
-import zork.models.items.Item;
-import zork.models.items.actions.NukaAction;
-import zork.models.items.actions.ShovelAction;
-import zork.models.items.actions.WoodAction;
 
 /**
  *
@@ -36,24 +28,14 @@ public class Zork {
     private final Parser parser;
 
     /**
-     * Current location of the player
-     */
-    private Room currentRoom;
-
-    /**
-     * All the rooms
-     */
-    private List<Room> rooms;
-
-    /**
-     * The player object
-     */
-    private Player player;
-
-    /**
      * The loop that starts and ends the game.
      */
     private final ZorkLoop loop;
+
+    /**
+     *
+     */
+    private final GameState game;
 
     /**
      * Default constructor. Initializes the scanner object, the loop to start
@@ -64,88 +46,169 @@ public class Zork {
         this.scanner = new Scanner(System.in);
         this.loop = new ZorkLoop();
         this.parser = new Parser(this.scanner);
-        initPlayer();
-        initRooms();
+        this.game = new GameState(this.scanner);
 
     }
 
     /**
-     * Initializes the player object. Asks the user to submit name and age.
+     *
+     * @param commands
      */
-    private void initPlayer() {
+    public void specifyDirection(Queue<EVerbs> commands) {
+        EVerbs command;
+        if (commands.isEmpty()) {
 
-        String name = null;
-        int age = 0;
-
-        System.out.println("What's your name?");
-
-        while (name == null) {
-
-            name = this.scanner.nextLine();
+            System.out.println("\nWhere do you want to go?");
+            commands = this.parser.getCommand();
 
         }
+        command = commands.poll();
+        Room nextRoom = this.game.getCurrentRoom().goToNextRoom(command);
 
-        System.out.println("How Old are you?");
-        do {
-
-            if (this.scanner.hasNextInt()) {
-                age = this.scanner.nextInt();
-            } else {
-                System.out.println("You can only enter numbers for your age.");
-                this.scanner.next();
-            }
-
-        } while (age <= 0);
-        this.scanner.nextLine();
-        this.player = new Player(name, age);
+        if (nextRoom != null) {
+            this.game.setCurrentRoom(nextRoom);
+        } else {
+            System.out.println("\nYou walked into a wall...");
+        }
     }
 
     /**
-     * Initializes all the rooms and the items in them.
+     *
+     * @param commands
      */
-    private void initRooms() {
+    public void specifyObject(Queue<EVerbs> commands) {
+        EVerbs command;
 
-        Room garden = new Room("Garden", "The King's Garden. A very pleasant place.");
-        Room throneRoom = new Room("Throne Room", "The kining is awaiting you.");
-        Room armory = new Room("Armory", "The armory is filled with swords and muskets.");
-        Room diningRoom = new Room("Dining Room", "You see a grand table with lots of chairs around it.");
-        Room kitchen = new Room("Kitchen", "You smell a steak sizzling on a fire.");
+        if (commands.isEmpty()) {
 
-        Item shovel = new Item("shovel", "A rusty shovel", 1, new ShovelAction());
-        Item bucket = new Item("bucket", "It has a hole in it.", 0);
-        Item axe = new Item("axe", "A dangerous looking weapon.", 10, new AxeAction());
-        Item nuka = new Item("nuka", "!!!!!!!!!???????", 1111111111, new NukaAction(this.player));
-        Item wood = new Item("wood", "???", 100000, new WoodAction(this.player));
+            System.out.println("\nTake what?");
+            commands = this.parser.getCommand();
 
-        Npc king = new Npc("King", 40);
-        Npc cook = new Npc("Cook", 27);
-        Npc wd = new Npc("Wood", 100);
+        }
+        command = commands.poll();
 
-        garden.setExits(null, null, throneRoom, null);
-        throneRoom.setExits(garden, null, diningRoom, armory);
-        armory.setExits(null, throneRoom, null, null);
-        diningRoom.setExits(throneRoom, null, kitchen, null);
-        kitchen.setExits(diningRoom, null, null, null);
+        if (command.equals(EVerbs.ALL)) {
 
-        garden.getItems().add(shovel);
-        garden.getItems().add(bucket);
-        armory.getItems().add(axe);
-        armory.getItems().add(nuka);
-        throneRoom.getItems().add(wood);
+            this.game.getCurrentRoom().getItems().forEach((item) -> {
+                System.out.println(
+                        "\n" + item.getName() + " added to your inventory."
+                );
 
-        throneRoom.getCharacters().add(king);
-        kitchen.getCharacters().add(cook);
-        garden.getCharacters().add(wd);
+                this.game.getPlayer().getInventory().add(item);
+            });
+            this.game.getCurrentRoom().getItems().clear();
+        }
+    }
 
-        this.rooms = new ArrayList<>();
-        this.rooms.add(garden);
-        this.rooms.add(throneRoom);
-        this.rooms.add(armory);
-        this.rooms.add(diningRoom);
-        this.rooms.add(kitchen);
+    public void specifyItem(Queue<EVerbs> commands) {
+        EVerbs command;
 
-        this.currentRoom = rooms.get(3);
+        if (commands.isEmpty()) {
 
+            System.out.println("\nUse what?");
+            commands = this.parser.getCommand();
+
+        }
+        command = commands.poll();
+
+        if (command.equals(EVerbs.ALL)) {
+
+            this.game.getPlayer().getInventory().forEach(item -> {
+                item.use();
+            });
+        } else {
+            for (EItem item : EItem.values()) {
+                if (EItem.valueOf(command.toString()).equals(item)) {
+                    this.game.getPlayer().getInventory().forEach(itm -> {
+                        if (itm.getName().toUpperCase().equals(item.toString())) {
+                            itm.use();
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    public void masochistAction() {
+        double selfDamage = this.game.getPlayer().getStats().get(EStats.ATTACK).getValue();
+        System.out.println("\nYou hit yourself with a bludgeon.");
+        this.game.getPlayer().takeDamage(selfDamage);
+    }
+
+    /**
+     *
+     */
+    public void attackAction() {
+        if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
+            if (this.game.getCurrentRoom().getCharacters().get(0) instanceof DamageAbleEntity) {
+
+                DamageAbleEntity dmgChar = (DamageAbleEntity) this.game.getCurrentRoom().getCharacters().get(0);
+                dmgChar.takeDamage(this.game.getPlayer().getStats().
+                        get(EStats.ATTACK).getValue());
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    public void npcGreetings() {
+        if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
+            System.out.println("There is somebody in the room...");
+            this.game.getCurrentRoom().getCharacters().forEach(character -> {
+                if (character instanceof Npc) {
+                    Npc ch = (Npc) character;
+                    ch.salutation();
+                }
+            });
+        }
+    }
+
+    /**
+     *
+     * @param commands
+     */
+    public void selectAction(Queue<EVerbs> commands) {
+        EVerbs command = commands.poll();
+        switch (command) {
+            case HELP:
+                showHelp();
+                break;
+            case QUIT:
+                goodbyeMessage();
+                this.loop.quit();
+                break;
+            case GO:
+                specifyDirection(commands);
+                break;
+            case DESCRIBE:
+                System.out.println(this.game.getCurrentRoom().getDescription());
+                break;
+            case TAKE:
+                specifyObject(commands);
+                break;
+            case INVENTORY:
+                this.game.getPlayer().showInventory();
+                break;
+            case USE:
+                specifyItem(commands);
+                break;
+            case STATS:
+                this.game.getPlayer().displayStats();
+                break;
+            case MASOCHIST:
+                masochistAction();
+                break;
+            case ATTACK:
+                attackAction();
+                break;
+            default:
+                System.out.println("\nI don't understand that command.");
+
+        }
     }
 
     /**
@@ -157,19 +220,11 @@ public class Zork {
 
         this.loop.start();
 
-        while (this.loop.isRunning() && this.player.isAlive()) {
+        while (this.loop.isRunning() && this.game.getPlayer().isAlive()) {
 
-            System.out.println("\nYou are in the " + this.currentRoom.getName() + ".");
+            System.out.println("\nYou are in the " + this.game.getCurrentRoom().getName() + ".");
 
-            if (!this.currentRoom.getCharacters().isEmpty()) {
-                System.out.println("There is somebody in the room...");
-                this.currentRoom.getCharacters().forEach(character -> {
-                    if (character instanceof Npc) {
-                        Npc ch = (Npc) character;
-                        ch.salutation();
-                    }
-                });
-            }
+            npcGreetings();
 
             System.out.println("What do you want to do?");
 
@@ -177,102 +232,7 @@ public class Zork {
 
             while (!commands.isEmpty()) {
 
-                EVerbs command = commands.poll();
-
-                switch (command) {
-                    case HELP:
-                        showHelp();
-                        break;
-                    case QUIT:
-                        this.loop.quit();
-                        goodbyeMessage();
-                        break;
-                    case GO:
-                        if (commands.isEmpty()) {
-
-                            System.out.println("\nWhere do you want to go?");
-                            commands = this.parser.getCommand();
-
-                        }
-                        command = commands.poll();
-                        Room nextRoom = this.currentRoom.goToNextRoom(command);
-
-                        if (nextRoom != null) {
-                            this.currentRoom = nextRoom;
-                        } else {
-                            System.out.println("\nYou walked into a wall...");
-                        }
-                        break;
-                    case DESCRIBE:
-                        System.out.println(this.currentRoom.getDescription());
-                        break;
-                    case TAKE:
-                        if (commands.isEmpty()) {
-
-                            System.out.println("\nTake what?");
-                            commands = this.parser.getCommand();
-
-                        }
-                        command = commands.poll();
-
-                        if (command.equals(EVerbs.ALL)) {
-                            this.currentRoom.getItems().forEach((item) -> {
-                                System.out.println("\n" + item.getName() + " added to your inventory.");
-                                this.player.getInventory().add(item);
-                            });
-                            this.currentRoom.getItems().clear();
-                        }
-                        break;
-                    case INVENTORY:
-                        this.player.showInventory();
-                        break;
-                    case USE:
-                        if (commands.isEmpty()) {
-
-                            System.out.println("\nUse what?");
-                            commands = this.parser.getCommand();
-
-                        }
-                        command = commands.poll();
-
-                        if (command.equals(EVerbs.ALL)) {
-
-                            this.player.getInventory().forEach(item -> {
-                                item.use();
-                            });
-                        } else {
-                            for (EItem item : EItem.values()) {
-                                if (EItem.valueOf(command.toString()).equals(item)) {
-                                    this.player.getInventory().forEach(itm -> {
-                                        if (itm.getName().toUpperCase().equals(item.toString())) {
-                                            itm.use();
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                        break;
-                    case STATS:
-                        this.player.displayStats();
-                        break;
-                    case MASOCHIST:
-                        double selfDamage = this.player.getStats().get(EStats.ATTACK).getValue();
-                        System.out.println("\nYou hit yourself with a bludgeon.");
-                        this.player.takeDamage(selfDamage);
-                        break;
-                    case ATTACK:
-
-                        if (!this.currentRoom.getCharacters().isEmpty()) {
-                            if (this.currentRoom.getCharacters().get(0) instanceof DamageAbleEntity) {
-                                DamageAbleEntity dmgChar = (DamageAbleEntity) this.currentRoom.getCharacters().get(0);
-                                dmgChar.takeDamage(this.player.getStats().get(EStats.ATTACK).getValue());
-                            }
-                        }
-                        break;
-                    default:
-                        System.out.println("\nI don't understand that command.");
-
-                }
+                selectAction(commands);
 
             }
         }
@@ -284,7 +244,7 @@ public class Zork {
      */
     public void welcomeMessage() {
 
-        System.out.println("Hail brave " + this.player.getName() + ". Welcome to Zork.");
+        System.out.println("Hail brave " + this.game.getPlayer().getName() + ". Welcome to Zork.");
 
     }
 
@@ -292,7 +252,7 @@ public class Zork {
      * Message printed when the player quits the game
      */
     public void goodbyeMessage() {
-        System.out.println("\nSee you again soon " + this.player.getName() + "!");
+        System.out.println("\nSee you again soon " + this.game.getPlayer().getName() + "!");
     }
 
     /**
