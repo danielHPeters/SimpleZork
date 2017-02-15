@@ -189,4 +189,18 @@ public class ZorkActions {
     public void currentRoomMessage(){
         System.out.println("\nYou are in the " + this.game.getCurrentRoom().getName() + ".");
     }
+    
+    /**
+     * 
+     */
+    public void unknownCmdMsg(){
+        System.out.println("\nI don't understand that command.");
+    }
+    
+    /**
+     * 
+     */
+    public void askForAction(){
+        System.out.println("What do you want to do?");
+    }
 }

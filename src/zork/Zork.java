@@ -1,6 +1,5 @@
 package zork;
 
-import zork.engine.ZorkLoop;
 import zork.enums.EVerbs;
 import zork.utils.Parser;
 import java.util.Queue;
@@ -13,6 +12,11 @@ import zork.generators.PlayerGenerator;
  * @author d.peters
  */
 public class Zork {
+    
+    /**
+     * Boolean flag to test if the game loop is to be ended.
+     */
+    private boolean running;
 
     /**
      * Scanner to scan user input from console.
@@ -23,11 +27,6 @@ public class Zork {
      * The parser object to parse input commands.
      */
     private final Parser parser;
-
-    /**
-     * The loop that starts and ends the game.
-     */
-    private final ZorkLoop loop;
     
     /**
      * 
@@ -56,7 +55,6 @@ public class Zork {
     public Zork() {
 
         this.scanner = new Scanner(System.in);
-        this.loop = new ZorkLoop();
         this.parser = new Parser(this.scanner);
         this.pGen = new PlayerGenerator(this.scanner);
         this.game = new GameState(this.pGen.createPlayer());
@@ -67,6 +65,19 @@ public class Zork {
 
     }
 
+    /**
+     * Start the loop and the game
+     */
+    public void start(){
+        this.running = true;
+    }
+    
+    /**
+     * End the loop and the game
+     */
+    public void quit(){
+        this.running = false;
+    }
     
 
     /**
@@ -81,7 +92,7 @@ public class Zork {
                 break;
             case QUIT:
                 this.actions.goodbyeMessage();
-                this.loop.quit();
+                quit();
                 break;
             case GO:
                 this.actions.specifyDirection(commands);
@@ -108,7 +119,7 @@ public class Zork {
                 this.actions.attackAction();
                 break;
             default:
-                System.out.println("\nI don't understand that command.");
+                this.actions.unknownCmdMsg();
 
         }
     }
@@ -120,15 +131,15 @@ public class Zork {
 
         this.actions.welcomeMessage();
 
-        this.loop.start();
+        start();
 
-        while (this.loop.isRunning() && this.game.getPlayer().isAlive()) {
+        while (this.running && this.game.getPlayer().isAlive()) {
 
             this.actions.currentRoomMessage();
 
             this.actions.npcGreetings();
 
-            System.out.println("What do you want to do?");
+            this.actions.askForAction();
 
             Queue<EVerbs> commands = parser.getCommand();
 
