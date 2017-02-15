@@ -1,7 +1,6 @@
 package zork.engine;
 
 import java.util.Queue;
-import zork.GameState;
 import zork.ZorkActions;
 import zork.enums.EVerbs;
 
@@ -10,46 +9,38 @@ import zork.enums.EVerbs;
  * @author d.peters
  */
 public class ZorkLoop {
-    
+
     /**
      * Boolean flag to test if the game loop is to be ended.
      */
     private boolean running;
-    
+
     /**
      *
      */
-    private final GameState game;
-    
-    /**
-     * 
-     */
     private final ZorkActions actions;
-    
+
     /**
-     * 
-     * @param game
-     * @param actions 
+     *
+     * @param actions
      */
-    public ZorkLoop(GameState game, ZorkActions actions){
-        this.game = game;
+    public ZorkLoop(ZorkActions actions) {
         this.actions = actions;
     }
-    
+
     /**
      * Start the loop and the game
      */
-    public void start(){
+    public void start() {
         this.running = true;
     }
-    
+
     /**
      * End the loop and the game
      */
-    public void quit(){
+    public void quit() {
         this.running = false;
     }
-    
 
     /**
      *
@@ -57,6 +48,7 @@ public class ZorkLoop {
      */
     public void selectAction(Queue<EVerbs> commands) {
         EVerbs command = commands.poll();
+
         switch (command) {
             case HELP:
                 this.actions.showHelp();
@@ -75,13 +67,13 @@ public class ZorkLoop {
                 this.actions.specifyObject(commands);
                 break;
             case INVENTORY:
-                this.game.getPlayer().showInventory();
+                this.actions.showPlayerInventory();
                 break;
             case USE:
                 this.actions.specifyItem(commands);
                 break;
             case STATS:
-                this.game.getPlayer().displayStats();
+                this.actions.showPlayerStats();
                 break;
             case MASOCHIST:
                 this.actions.masochistAction();
@@ -104,7 +96,7 @@ public class ZorkLoop {
 
         start();
 
-        while (this.running && this.game.getPlayer().isAlive()) {
+        while (this.running && this.actions.playerIsAlive()) {
 
             this.actions.currentRoomMessage();
 
@@ -122,5 +114,5 @@ public class ZorkLoop {
         }
 
     }
-    
+
 }

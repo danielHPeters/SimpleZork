@@ -211,4 +211,27 @@ public class ZorkActions {
     public Queue<EVerbs> getCommand(){
         return parser.getCommand();
     }
+    
+    /**
+     * 
+     */
+    public void showPlayerInventory(){
+        this.game.getPlayer().showInventory();
+    }
+    
+    /**
+     * 
+     */
+    public void showPlayerStats(){
+        this.game.getPlayer().displayStats();
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public boolean playerIsAlive(){
+        
+        return this.game.getPlayer().isAlive();
+    }
 }

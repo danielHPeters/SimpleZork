@@ -61,7 +61,7 @@ public class Zork {
         this.game.setRooms(this.mGen.createRooms(this.game.getPlayer()));
         this.game.setCurrentRoom(this.game.getRooms().get(3));
         this.actions = new ZorkActions(this.parser, this.game);
-        this.loop = new ZorkLoop(this.game, this.actions);
+        this.loop = new ZorkLoop(this.actions);
 
     }
 
