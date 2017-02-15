@@ -18,12 +18,12 @@ public class ZorkActions {
     /**
      * 
      */
-    private Parser parser;
+    private final Parser parser;
     
     /**
      * 
      */
-    private GameState game;
+    private final GameState game;
     
     /**
      * 
@@ -202,5 +202,13 @@ public class ZorkActions {
      */
     public void askForAction(){
         System.out.println("What do you want to do?");
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public Queue<EVerbs> getCommand(){
+        return parser.getCommand();
     }
 }
