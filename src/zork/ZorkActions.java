@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Daniel
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package zork;
 
 import java.util.Queue;
@@ -14,27 +30,27 @@ import zork.utils.Parser;
  * @author d.peters
  */
 public class ZorkActions {
-    
+
     /**
-     * 
+     *
      */
     private final Parser parser;
-    
+
     /**
-     * 
+     *
      */
     private final GameState game;
-    
+
     /**
-     * 
+     *
      * @param parser
-     * @param game 
+     * @param game
      */
-    public ZorkActions(Parser parser, GameState game){
+    public ZorkActions(Parser parser, GameState game) {
         this.parser = parser;
         this.game = game;
     }
-    
+
     /**
      *
      * @param commands
@@ -106,7 +122,7 @@ public class ZorkActions {
                 if (EItem.valueOf(command.toString()).equals(item)) {
                     this.game.getPlayer().getInventory().forEach(itm -> {
                         if (itm.getName().toUpperCase().equals(item.toString())) {
-                            itm.use();
+                            itm.use(this.game.getPlayer());
                         }
                     });
                 }
@@ -151,7 +167,7 @@ public class ZorkActions {
             });
         }
     }
-    
+
     /**
      * Message printed when the player starts the game
      */
@@ -178,60 +194,60 @@ public class ZorkActions {
         }
 
     }
-    
-    public void roomDescription(){
+
+    public void roomDescription() {
         System.out.println(this.game.getCurrentRoom().getDescription());
     }
-    
+
     /**
-     * 
+     *
      */
-    public void currentRoomMessage(){
+    public void currentRoomMessage() {
         System.out.println("\nYou are in the " + this.game.getCurrentRoom().getName() + ".");
     }
-    
+
     /**
-     * 
+     *
      */
-    public void unknownCmdMsg(){
+    public void unknownCmdMsg() {
         System.out.println("\nI don't understand that command.");
     }
-    
+
     /**
-     * 
+     *
      */
-    public void askForAction(){
+    public void askForAction() {
         System.out.println("What do you want to do?");
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
-    public Queue<EVerbs> getCommand(){
+    public Queue<EVerbs> getCommand() {
         return parser.getCommand();
     }
-    
+
     /**
-     * 
+     *
      */
-    public void showPlayerInventory(){
+    public void showPlayerInventory() {
         this.game.getPlayer().showInventory();
     }
-    
+
     /**
-     * 
+     *
      */
-    public void showPlayerStats(){
+    public void showPlayerStats() {
         this.game.getPlayer().displayStats();
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
-    public boolean playerIsAlive(){
-        
+    public boolean playerIsAlive() {
+
         return this.game.getPlayer().isAlive();
     }
 }

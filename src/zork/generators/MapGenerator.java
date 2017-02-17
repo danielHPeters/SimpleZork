@@ -1,10 +1,25 @@
+/*
+ * Copyright (C) 2017 Daniel
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package zork.generators;
 
 import java.util.ArrayList;
 import java.util.List;
 import zork.models.Room;
 import zork.models.entities.Npc;
-import zork.models.entities.Player;
 import zork.models.items.Item;
 import zork.models.items.actions.AxeAction;
 import zork.models.items.actions.NukaAction;
@@ -17,7 +32,7 @@ import zork.models.items.actions.WoodAction;
  */
 public class MapGenerator {
     
-    public List<Room> createRooms(Player player) {
+    public List<Room> createRooms() {
 
         List<Room> rooms;
 
@@ -30,8 +45,8 @@ public class MapGenerator {
         Item shovel = new Item("shovel", "A rusty shovel", 1, new ShovelAction());
         Item bucket = new Item("bucket", "It has a hole in it.", 0);
         Item axe = new Item("axe", "A dangerous looking weapon.", 10, new AxeAction());
-        Item nuka = new Item("nuka", "!!!!!!!!!???????", 1111111111, new NukaAction(player));
-        Item wood = new Item("wood", "???", 100000, new WoodAction(player));
+        Item nuka = new Item("nuka", "!!!!!!!!!???????", 1111111111, new NukaAction());
+        Item wood = new Item("wood", "???", 100000, new WoodAction());
 
         Npc king = new Npc("King", 40);
         Npc cook = new Npc("Cook", 27);

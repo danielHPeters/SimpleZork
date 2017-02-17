@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Daniel
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package zork.models.items.actions;
 
 import zork.interfaces.IUseable;
@@ -12,21 +28,13 @@ public class WoodAction implements IUseable {
     /**
      *
      */
-    private final Player player;
-
-    /**
-     *
-     * @param player
-     */
-    public WoodAction(Player player) {
-        this.player = player;
-    }
-
-    /**
-     *
-     */
     @Override
     public void use() {
+
+    }
+
+    @Override
+    public void use(Player player) {
 
         switch (player.getName()) {
             case "Chuck Norris":
@@ -36,15 +44,15 @@ public class WoodAction implements IUseable {
                 System.out.println("\nWhatever. You win, stupid!");
                 break;
             default:
-                if (player.getName().equals("Wood")){
-                    
+                if (player.getName().equals("Wood")) {
+
                     System.out.println("\nNice try, stupid!");
                 } else {
                     System.out.println("\nYou cannot use wood! Wood uses you, stupid!");
-                }   this.player.die();
+                }
+                player.die();
                 break;
         }
-
     }
 
 }

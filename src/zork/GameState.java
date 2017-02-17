@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2017 Daniel
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package zork;
 
@@ -23,21 +34,23 @@ public class GameState {
     /**
      * All the rooms
      */
-    private List<Room> rooms;
+    private final List<Room> rooms;
 
     /**
      * The player object
      */
-    private Player player;
+    private final Player player;
 
     /**
      * Default constructor which initializes the game objects and the reference
      * to the scanner object.
      *
      * @param player
+     * @param rooms
      */
-    public GameState(Player player) {
+    public GameState(Player player, List<Room> rooms) {
         this.player = player;
+        this.rooms = rooms;
     }
 
     /**
@@ -70,16 +83,6 @@ public class GameState {
      */
     public List<Room> getRooms() {
         return rooms;
-    }
-    
-
-    /**
-     * 
-     * @param rooms 
-     */
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
-    
+    }  
 
 }
