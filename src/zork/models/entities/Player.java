@@ -36,6 +36,7 @@ public class Player extends DamageAbleEntity {
 
     /**
      * Default constructor. Initializes name and age of player.
+     *
      * @param name player name
      * @param age age of the player
      */
@@ -47,6 +48,7 @@ public class Player extends DamageAbleEntity {
 
     /**
      * Getter for the player inventory.
+     *
      * @return
      */
     public List<Item> getInventory() {
@@ -61,13 +63,10 @@ public class Player extends DamageAbleEntity {
         if (this.inventory.isEmpty()) {
             System.out.println("Your inventory is empty.");
         } else {
-            this.inventory.forEach(item -> {
-                System.out.println(
-                        "Item: " + item.getName()
-                        + " - " + item.getDescription()
-                        + " - Price: " + item.getPrice()
-                );
-            });
+            this.inventory.forEach(
+                    item -> System.out.println("Item: " + item.getName()
+                            + " - " + item.getDescription()
+                            + " - Price: " + item.getPrice()));
         }
     }
 
@@ -75,9 +74,9 @@ public class Player extends DamageAbleEntity {
      * Display all stats of this player
      */
     public void displayStats() {
-        this.stats.forEach((eStat, stat) -> {
-            System.out.println(eStat + ": " + stat.getValue());
-        });
+        this.stats.forEach(
+                (eStat, stat) -> System.out.println(eStat + ": " + stat.getValue())
+        );
     }
 
     @Override
