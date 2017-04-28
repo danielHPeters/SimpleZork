@@ -19,6 +19,9 @@ package zork.utils;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import zork.Command;
+import zork.enums.EItem;
+import zork.enums.EPreposition;
 import zork.enums.EVerbs;
 
 /**
@@ -80,14 +83,31 @@ public class Parser {
         return foundWords;
     }
 
-    public void parse() {
+    public Command parse() {
         String[] input = handleInput();
 
-        
-        try {
-            
-        } catch (IllegalArgumentException e) {
+        Command comm = null;
+
+        switch (input.length) {
+            case 1:
+                comm = new Command(EVerbs.valueOf(input[0]));
+                break;
+            case 2:
+                comm = new Command(EVerbs.valueOf(input[0]), EItem.valueOf(input[1]));
+                break;
+            case 4:
+                comm = new Command(
+                        EVerbs.valueOf(input[0]), EItem.valueOf(input[1]),
+                        EPreposition.valueOf(input[2]), EItem.valueOf(input[3])
+                );
+                break;
+            default:
+                comm = null;
+                break;
+
         }
+
+        return comm;
     }
 
 }

@@ -64,5 +64,17 @@ public class Command {
         this.verb = verb;
         this.subject = subject;
     }
+    
+    /**
+     * 
+     * @param verb
+     * @param subject
+     * @param preposition
+     * @param object 
+     */
+    public Command(EVerbs verb, EItem subject, EPreposition preposition, EItem object) {
+        this.verb = verb;
+        this.subject = subject;
+    }
 
 }
