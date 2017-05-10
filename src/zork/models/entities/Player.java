@@ -21,13 +21,14 @@ import zork.models.entities.base.DamageAbleEntity;
 import java.util.ArrayList;
 import java.util.List;
 import zork.models.items.Item;
+import zork.models.talk.ITalkable;
 
 /**
  * Ingame Representation of players.
  *
  * @author d.peters
  */
-public class Player extends DamageAbleEntity {
+public class Player extends DamageAbleEntity implements ITalkable {
 
     /**
      * The inventory of the player.
@@ -82,6 +83,17 @@ public class Player extends DamageAbleEntity {
     @Override
     public void move() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void talkTo(ITalkable to) {
+        salutation();
+        to.salutation();
+    }
+
+    @Override
+    public void salutation() {
+        System.out.println("Me: Hello there. I'm " + this.getName() + ". How do you do?");
     }
 
 }

@@ -18,6 +18,7 @@ package zork.generators;
 
 import java.util.ArrayList;
 import java.util.List;
+import zork.enums.ENpc;
 import zork.models.Room;
 import zork.models.entities.Npc;
 import zork.models.items.Item;
@@ -31,7 +32,7 @@ import zork.models.items.actions.WoodAction;
  * @author d.peters
  */
 public class MapGenerator {
-    
+
     public List<Room> createRooms() {
 
         List<Room> rooms;
@@ -48,9 +49,9 @@ public class MapGenerator {
         Item nuka = new Item("nuka", "!!!!!!!!!???????", 1111111111, new NukaAction());
         Item wood = new Item("wood", "???", 100000, new WoodAction());
 
-        Npc king = new Npc("King", 40);
-        Npc cook = new Npc("Cook", 27);
-        Npc wd = new Npc("Wood", 100);
+        Npc king = new Npc("King", 40, ENpc.KING);
+        Npc cook = new Npc("Cook", 27, ENpc.COOK);
+        Npc wd = new Npc("Wood", 100, ENpc.WOOD);
 
         garden.setExits(null, null, throneRoom, null);
         throneRoom.setExits(garden, null, diningRoom, armory);

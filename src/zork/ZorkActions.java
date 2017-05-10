@@ -18,11 +18,13 @@ package zork;
 
 import java.util.Queue;
 import zork.enums.EItem;
+import zork.enums.ENpc;
 import zork.enums.EStats;
 import zork.enums.EVerbs;
 import zork.models.Room;
 import zork.models.entities.Npc;
 import zork.models.entities.base.DamageAbleEntity;
+import zork.models.talk.ITalkable;
 import zork.utils.Parser;
 
 /**
@@ -129,6 +131,39 @@ public class ZorkActions {
             }
         }
     }
+    
+    public void talkToNpc(Queue<EVerbs> commands){
+        
+        EVerbs command;
+        
+        if (commands.isEmpty()) {
+
+            System.out.println("\nTo whom?");
+            commands = this.parser.getCommand();
+
+        }
+        
+        command = commands.poll();
+        
+        if(!this.game.getCurrentRoom().getCharacters().isEmpty()){
+            for (ENpc item : ENpc.values()) {
+                if (ENpc.valueOf(command.toString()).equals(item)) {
+                    ENpc npcId = ENpc.valueOf(command.toString());
+                    this.game.getCurrentRoom().getCharacters().forEach(character ->{
+                        if(character instanceof Npc){
+                            Npc npc = (Npc) character;
+                            if(npc.getId().equals(npcId)){
+                                this.game.getPlayer().talkTo(npc);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+        
+        ITalkable to;
+        
+    }
 
     /**
      *
@@ -156,15 +191,9 @@ public class ZorkActions {
     /**
      *
      */
-    public void npcGreetings() {
+    public void foundNpc() {
         if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
             System.out.println("There is somebody in the room...");
-            this.game.getCurrentRoom().getCharacters().forEach(character -> {
-                if (character instanceof Npc) {
-                    Npc ch = (Npc) character;
-                    ch.salutation();
-                }
-            });
         }
     }
 

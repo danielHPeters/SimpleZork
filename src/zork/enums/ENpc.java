@@ -14,15 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package zork.models.talk;
+package zork.enums;
 
 /**
  *
  * @author d.peters
  */
-public interface ITalkable {
-    
-    public void talkTo(ITalkable to);
-    
-    public void salutation();
+public enum ENpc {
+    KING, COOK, WOOD
 }

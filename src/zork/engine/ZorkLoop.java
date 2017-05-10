@@ -97,6 +97,8 @@ public class ZorkLoop {
             case ATTACK:
                 this.actions.attackAction();
                 break;
+            case TALK:
+                this.actions.talkToNpc(commands);
             default:
                 this.actions.unknownCmdMsg();
 
@@ -116,7 +118,7 @@ public class ZorkLoop {
 
             this.actions.currentRoomMessage();
 
-            this.actions.npcGreetings();
+            this.actions.foundNpc();
 
             this.actions.askForAction();
 

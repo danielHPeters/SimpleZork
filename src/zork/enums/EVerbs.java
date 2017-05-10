@@ -42,6 +42,9 @@ public enum EVerbs {
     SHOVEL("Use schovel"),
     WOOD("???"),
     NUKA("!!!!!????"),
+    TALK("Talk to npc specified right after this command"),
+    KING("Talk to the King"),
+    COOK("Talk to the cook."),
     UNDEFINED("This is only for internal use.");
     
     private final String details;
