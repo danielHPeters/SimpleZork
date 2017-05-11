@@ -99,6 +99,7 @@ public class ZorkLoop {
                 break;
             case TALK:
                 this.actions.talkToNpc(commands);
+                break;
             default:
                 this.actions.unknownCmdMsg();
 
