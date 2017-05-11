@@ -17,13 +17,13 @@
 package zork.interfaces;
 
 /**
- *
+ * Interface for movable objects
  * @author d.peters
  */
 public interface IMoveable {
     
     /**
-     * 
+     * Movement specification of object.
      */
     public void move();
     

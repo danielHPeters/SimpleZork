@@ -19,6 +19,7 @@ package zork.enums;
 /**
  *
  * @author Daniel
+ * @version 1.0.4
  */
 public enum EVerbs {
     

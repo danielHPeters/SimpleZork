@@ -27,6 +27,7 @@ import zork.models.talk.ITalkable;
  * Ingame Representation of players.
  *
  * @author d.peters
+ * @version 1.1.0
  */
 public class Player extends DamageAbleEntity implements ITalkable {
 

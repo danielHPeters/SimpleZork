@@ -19,16 +19,22 @@ package zork.interfaces;
 import zork.models.entities.Player;
 
 /**
+ * Interface for useable objects
  *
  * @author d.peters
  */
 public interface IUseable {
-    
+
     /**
-     * 
+     * default use method
      */
     public void use();
-    
+
+    /**
+     * Use on player
+     *
+     * @param player player object
+     */
     public void use(Player player);
-    
+
 }

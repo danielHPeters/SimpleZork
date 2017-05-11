@@ -28,11 +28,19 @@ import zork.models.items.actions.ShovelAction;
 import zork.models.items.actions.WoodAction;
 
 /**
+ * Generator for rooms. TODO make dynamic and procedurally generated or via
+ * config file
  *
  * @author d.peters
+ * @version 1.0.4
  */
 public class MapGenerator {
 
+    /**
+     * Create the rooms whith all their contents.
+     *
+     * @return
+     */
     public List<Room> createRooms() {
 
         List<Room> rooms;

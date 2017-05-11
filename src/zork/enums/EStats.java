@@ -17,8 +17,10 @@
 package zork.enums;
 
 /**
+ * List of available stats in the game.
  *
  * @author d.peters
+ * @version 1.0.1
  */
 public enum EStats {
     HEALTH, ARMOR, ATTACK;

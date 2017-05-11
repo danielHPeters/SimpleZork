@@ -17,15 +17,17 @@
 package zork.interfaces;
 
 /**
+ * Interface for damageable objects
  *
  * @author d.peters
  */
 public interface IDamageable {
-    
+
     /**
-     * 
-     * @param damage 
+     * Function that specifies how the character takes damage.
+     *
+     * @param damage damage dealt to the character
      */
     public void takeDamage(double damage);
-    
+
 }

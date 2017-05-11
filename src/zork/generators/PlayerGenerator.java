@@ -21,26 +21,29 @@ import zork.models.entities.Player;
 
 /**
  * Generator for player objects.
+ *
  * @author d.peters
  */
 public class PlayerGenerator {
-    
+
     /**
-     * 
+     * Scanner to obtain command line input from user
      */
     private final Scanner scanner;
-    
+
     /**
-     * 
-     * @param scanner 
+     * Default constructor. Initializes the scanner.
+     *
+     * @param scanner
      */
-    public PlayerGenerator(Scanner scanner){
+    public PlayerGenerator(Scanner scanner) {
         this.scanner = scanner;
     }
-    
+
     /**
-     * 
-     * @return 
+     * Creates and returns a player
+     *
+     * @return
      */
     public Player createPlayer() {
 
@@ -49,6 +52,7 @@ public class PlayerGenerator {
 
         System.out.println("What's your name?");
 
+        // Wait until user inserts a name.
         while (name == null) {
 
             name = this.scanner.nextLine();
@@ -56,8 +60,10 @@ public class PlayerGenerator {
         }
 
         System.out.println("How Old are you?");
+
         do {
 
+            // Check input is of type int.
             if (this.scanner.hasNextInt()) {
                 age = this.scanner.nextInt();
             } else {
@@ -65,9 +71,9 @@ public class PlayerGenerator {
                 this.scanner.next();
             }
 
-        } while (age <= 0);
+        } while (age <= 0); // Check for invalid age.
         this.scanner.nextLine();
-        
-        return  new Player(name, age);
+
+        return new Player(name, age);
     }
 }

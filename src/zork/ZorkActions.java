@@ -24,7 +24,6 @@ import zork.enums.EVerbs;
 import zork.models.Room;
 import zork.models.entities.Npc;
 import zork.models.entities.base.DamageAbleEntity;
-import zork.models.talk.ITalkable;
 import zork.utils.Parser;
 
 /**
@@ -150,8 +149,9 @@ public class ZorkActions {
     }
 
     /**
+     * Talk to an npc. Ask for dialog partner if none given.
      *
-     * @param commands
+     * @param commands user submitted commands
      */
     public void talkToNpc(Queue<EVerbs> commands) {
 
@@ -182,8 +182,6 @@ public class ZorkActions {
             }
         }
 
-        ITalkable to;
-
     }
 
     /**
@@ -198,7 +196,7 @@ public class ZorkActions {
     /**
      * Attack a character
      *
-     * @param commands
+     * @param commands user submited commands
      */
     public void attackAction(Queue<EVerbs> commands) {
 
@@ -234,19 +232,19 @@ public class ZorkActions {
     }
 
     /**
-     *
+     * Tell the player if there are npc's around
      */
     public void foundNpc() {
         if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
-            this.game.getCurrentRoom().getCharacters().forEach(character ->{
-                
-                if (character.isAlive()){
-                    System.out.println( character.getName() + " is in the room...");
+            this.game.getCurrentRoom().getCharacters().forEach(character -> {
+
+                if (character.isAlive()) {
+                    System.out.println(character.getName() + " is in the room...");
                 } else {
-                    System.out.println( "You sense the corpse of " + character.getName());
+                    System.out.println("You sense the corpse of " + character.getName());
                 }
             });
-            
+
         }
     }
 
@@ -277,32 +275,36 @@ public class ZorkActions {
 
     }
 
+    /**
+     * Print the description of the room
+     */
     public void roomDescription() {
         System.out.println(this.game.getCurrentRoom().getDescription());
     }
 
     /**
-     *
+     * Tell the player his current location
      */
     public void currentRoomMessage() {
         System.out.println("\nYou are in the " + this.game.getCurrentRoom().getName() + ".");
     }
 
     /**
-     *
+     * Send message if user gave an invalid command
      */
     public void unknownCmdMsg() {
         System.out.println("\nI don't understand that command.");
     }
 
     /**
-     *
+     * Ask the player to do something
      */
     public void askForAction() {
         System.out.println("What do you want to do?");
     }
 
     /**
+     * Get commands from parser
      *
      * @return
      */
@@ -311,20 +313,21 @@ public class ZorkActions {
     }
 
     /**
-     *
+     * Print contents of the players inventory
      */
     public void showPlayerInventory() {
         this.game.getPlayer().showInventory();
     }
 
     /**
-     *
+     * Print player stats
      */
     public void showPlayerStats() {
         this.game.getPlayer().displayStats();
     }
 
     /**
+     * Check if player is alive
      *
      * @return
      */

@@ -17,6 +17,7 @@
 package zork.enums;
 
 /**
+ * Enum listing npc's in the game.
  *
  * @author d.peters
  */

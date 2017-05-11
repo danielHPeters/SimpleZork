@@ -21,6 +21,7 @@ import zork.ZorkActions;
 import zork.enums.EVerbs;
 
 /**
+ * This class contains the main loop an its relevant objects.
  *
  * @author d.peters
  */
@@ -60,6 +61,7 @@ public class ZorkLoop {
 
     /**
      * Selects an action depending on the first command in the queue
+     *
      * @param commands queue of commands entered by the user
      */
     public void selectAction(Queue<EVerbs> commands) {

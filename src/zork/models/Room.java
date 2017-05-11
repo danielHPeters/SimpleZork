@@ -23,8 +23,10 @@ import zork.models.entities.base.Entity;
 import zork.models.items.Item;
 
 /**
+ * Class describing a room object
  *
  * @author d.peters
+ * @version 1.1.0
  */
 public class Room {
 
@@ -57,14 +59,14 @@ public class Room {
      * Exit west of this room
      */
     private Room west;
-    
+
     /**
-     * 
+     * Items in this room.
      */
     private List<Item> items;
-    
+
     /**
-     * 
+     * Non player characters in this room
      */
     private List<Entity> characters;
 
@@ -100,19 +102,20 @@ public class Room {
         this.west = west;
         this.items = new ArrayList<>();
         this.characters = new ArrayList<>();
-        
+
     }
-    
+
     /**
-     * 
-     * @param direction 
-     * @return  
+     * Get the room to the specified direction
+     *
+     * @param direction desired direction.
+     * @return the room in the specified direction
      */
-    public Room goToNextRoom(EVerbs direction){
-        
+    public Room goToNextRoom(EVerbs direction) {
+
         Room room = this;
-        
-        switch(direction){
+
+        switch (direction) {
             case NORTH:
                 room = this.north;
                 break;
@@ -129,50 +132,53 @@ public class Room {
                 System.out.println("Invalid Direction.");
                 break;
         }
-        
+
         return room;
     }
 
     /**
-     * 
-     * @return 
+     * Get name of this room
+     *
+     * @return name of this room
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @return 
+     * Get description of this rooom
+     *
+     * @return the description of this room
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
-     * @return 
+     * Get the characters in this room
+     *
+     * @return the NPC's in this room
      */
     public List<Entity> getCharacters() {
         return characters;
     }
 
     /**
-     * 
-     * @return 
+     * Get the available items in this room
+     *
+     * @return the items in this room
      */
     public List<Item> getItems() {
         return items;
     }
 
     /**
-     * 
-     * @param items 
+     * Replace items in this room
+     *
+     * @param items list of new items
      */
     public void setItems(List<Item> items) {
         this.items = items;
     }
-    
-    
-    
+
 }
