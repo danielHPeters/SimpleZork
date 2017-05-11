@@ -25,20 +25,23 @@ import zork.models.entities.Player;
  */
 public class Item {
 
-    private final IUseable action;
-    
     /**
-     *
+     * Action of item. Null by default
+     */
+    private final IUseable action;
+
+    /**
+     * Name of item
      */
     private String name;
 
     /**
-     *
+     * Description of item
      */
     private String description;
 
     /**
-     *
+     * Price of item
      */
     private double price;
 
@@ -56,9 +59,16 @@ public class Item {
         this.action = null;
 
     }
-    
+
+    /**
+     *
+     * @param name
+     * @param description
+     * @param price
+     * @param action
+     */
     public Item(String name, String description, double price, IUseable action) {
-        
+
         this.name = name;
         this.description = description;
         this.price = price;
@@ -66,73 +76,72 @@ public class Item {
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name 
+     *
+     * @param name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
-     * @param description 
+     *
+     * @param description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public double getPrice() {
         return price;
     }
 
     /**
-     * 
-     * @param price 
+     *
+     * @param price
      */
     public void setPrice(double price) {
         this.price = price;
     }
-    
+
     /**
-     * 
+     *
      */
     public void use() {
-        
-        if (this.action == null){
+
+        if (this.action == null) {
             System.out.println("You cannot use the " + this.name + ".");
         } else {
             this.action.use();
         }
-        
+
     }
-    
-    public void use(Player player){
-        if (this.action == null){
+
+    public void use(Player player) {
+        if (this.action == null) {
             System.out.println("You cannot use the " + this.name + ".");
         } else {
             this.action.use(player);
         }
     }
-    
 
 }
