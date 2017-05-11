@@ -28,22 +28,26 @@ import zork.models.talk.ITalkable;
 import zork.utils.Parser;
 
 /**
+ * Here the game actions are defined. Only this class should know the state of
+ * the game objects
  *
  * @author d.peters
  */
 public class ZorkActions {
 
     /**
-     *
+     * The parser to get user input
      */
     private final Parser parser;
 
     /**
-     *
+     * State of the ingame objects
      */
     private final GameState game;
 
     /**
+     * Default constructor. It sets the parser and the game state which are
+     * passed down
      *
      * @param parser
      * @param game
@@ -54,11 +58,14 @@ public class ZorkActions {
     }
 
     /**
+     * Ask the user to specify if "go" was entered without any direction and/or
+     * go towards the specified direction
      *
-     * @param commands
+     * @param commands the user command
      */
     public void specifyDirection(Queue<EVerbs> commands) {
         EVerbs command;
+
         if (commands.isEmpty()) {
 
             System.out.println("\nWhere do you want to go?");
@@ -68,6 +75,7 @@ public class ZorkActions {
         command = commands.poll();
         Room nextRoom = this.game.getCurrentRoom().goToNextRoom(command);
 
+        // Check for invalid directions
         if (nextRoom != null) {
             this.game.setCurrentRoom(nextRoom);
         } else {
@@ -76,8 +84,12 @@ public class ZorkActions {
     }
 
     /**
+     * Add item from room to inventory, if it exists. If no item was specified,
+     * then ask user to specify
      *
-     * @param commands
+     * TODO: Allow picking up single items instead of just all
+     *
+     * @param commands user commands
      */
     public void specifyObject(Queue<EVerbs> commands) {
         EVerbs command;
@@ -103,6 +115,11 @@ public class ZorkActions {
         }
     }
 
+    /**
+     * Use item specified or ask user to name item to be used
+     *
+     * @param commands parsed user commands
+     */
     public void specifyItem(Queue<EVerbs> commands) {
         EVerbs command;
 
@@ -131,28 +148,32 @@ public class ZorkActions {
             }
         }
     }
-    
-    public void talkToNpc(Queue<EVerbs> commands){
-        
+
+    /**
+     *
+     * @param commands
+     */
+    public void talkToNpc(Queue<EVerbs> commands) {
+
         EVerbs command;
-        
+
         if (commands.isEmpty()) {
 
             System.out.println("\nTo whom?");
             commands = this.parser.getCommand();
 
         }
-        
+
         command = commands.poll();
-        
-        if(!this.game.getCurrentRoom().getCharacters().isEmpty()){
+
+        if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
             for (ENpc item : ENpc.values()) {
                 if (ENpc.valueOf(command.toString()).equals(item)) {
                     ENpc npcId = ENpc.valueOf(command.toString());
-                    this.game.getCurrentRoom().getCharacters().forEach(character ->{
-                        if(character instanceof Npc){
+                    this.game.getCurrentRoom().getCharacters().forEach(character -> {
+                        if (character instanceof Npc) {
                             Npc npc = (Npc) character;
-                            if(npc.getId().equals(npcId)){
+                            if (npc.getId().equals(npcId)) {
                                 this.game.getPlayer().talkTo(npc);
                             }
                         }
@@ -160,13 +181,13 @@ public class ZorkActions {
                 }
             }
         }
-        
+
         ITalkable to;
-        
+
     }
 
     /**
-     *
+     * Let the player hit himself if requested
      */
     public void masochistAction() {
         double selfDamage = this.game.getPlayer().getStats().get(EStats.ATTACK).getValue();
@@ -175,15 +196,39 @@ public class ZorkActions {
     }
 
     /**
+     * Attack a character
      *
+     * @param commands
      */
-    public void attackAction() {
-        if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
-            if (this.game.getCurrentRoom().getCharacters().get(0) instanceof DamageAbleEntity) {
+    public void attackAction(Queue<EVerbs> commands) {
 
-                DamageAbleEntity dmgChar = (DamageAbleEntity) this.game.getCurrentRoom().getCharacters().get(0);
-                dmgChar.takeDamage(this.game.getPlayer().getStats().
-                        get(EStats.ATTACK).getValue());
+        EVerbs command;
+
+        if (commands.isEmpty()) {
+
+            System.out.println("\nAttack what?");
+            commands = this.parser.getCommand();
+
+        }
+
+        command = commands.poll();
+
+        if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
+
+            for (ENpc item : ENpc.values()) {
+                if (ENpc.valueOf(command.toString()).equals(item)) {
+                    ENpc npcId = ENpc.valueOf(command.toString());
+                    this.game.getCurrentRoom().getCharacters().forEach(character -> {
+                        if (character instanceof Npc && character instanceof DamageAbleEntity) {
+                            Npc npc = (Npc) character;
+                            if (npc.getId().equals(npcId)) {
+                                DamageAbleEntity dmgChar = (DamageAbleEntity) npc;
+                                dmgChar.takeDamage(this.game.getPlayer().getStats().
+                                        get(EStats.ATTACK).getValue());
+                            }
+                        }
+                    });
+                }
             }
         }
     }
@@ -193,7 +238,15 @@ public class ZorkActions {
      */
     public void foundNpc() {
         if (!this.game.getCurrentRoom().getCharacters().isEmpty()) {
-            System.out.println("There is somebody in the room...");
+            this.game.getCurrentRoom().getCharacters().forEach(character ->{
+                
+                if (character.isAlive()){
+                    System.out.println( character.getName() + " is in the room...");
+                } else {
+                    System.out.println( "You sense the corpse of " + character.getName());
+                }
+            });
+            
         }
     }
 

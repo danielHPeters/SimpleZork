@@ -32,7 +32,7 @@ public class ZorkLoop {
     private boolean running;
 
     /**
-     *
+     * Game actions
      */
     private final ZorkActions actions;
 
@@ -59,8 +59,8 @@ public class ZorkLoop {
     }
 
     /**
-     *
-     * @param commands
+     * Selects an action depending on the first command in the queue
+     * @param commands queue of commands entered by the user
      */
     public void selectAction(Queue<EVerbs> commands) {
         EVerbs command = commands.poll();
@@ -95,7 +95,7 @@ public class ZorkLoop {
                 this.actions.masochistAction();
                 break;
             case ATTACK:
-                this.actions.attackAction();
+                this.actions.attackAction(commands);
                 break;
             case TALK:
                 this.actions.talkToNpc(commands);
@@ -115,6 +115,7 @@ public class ZorkLoop {
 
         start();
 
+        // Game last while the user is alive or until certain conditions are met
         while (this.running && this.actions.playerIsAlive()) {
 
             this.actions.currentRoomMessage();
@@ -125,6 +126,7 @@ public class ZorkLoop {
 
             Queue<EVerbs> commands = actions.getCommand();
 
+            // Process all parsed commands before asking user for new commands
             while (!commands.isEmpty()) {
 
                 selectAction(commands);

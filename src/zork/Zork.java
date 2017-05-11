@@ -23,6 +23,8 @@ import zork.generators.MapGenerator;
 import zork.generators.PlayerGenerator;
 
 /**
+ * Main class whic instantiates the core Objects of the Program like the parser,
+ * the generators, the game state etc.
  *
  * @author d.peters
  */
@@ -37,29 +39,30 @@ public class Zork {
      * The parser object to parse input commands.
      */
     private final Parser parser;
-    
+
     /**
-     * 
+     * Generator for player objects
      */
     private final PlayerGenerator pGen;
-    
+
     /**
-     * 
+     * Generator for maps (currently all the none player objects are also
+     * created here)
      */
     private final MapGenerator mGen;
 
     /**
-     *
+     * State of the game (all game objects and their data are stored here)
      */
     private final GameState game;
-    
+
     /**
-     * 
+     * Game actions
      */
     private final ZorkActions actions;
-    
+
     /**
-     * 
+     * This object contains the main program loop
      */
     private final ZorkLoop loop;
 
@@ -81,6 +84,8 @@ public class Zork {
     }
 
     /**
+     * Main method instantiates the game object and starts its loop
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
