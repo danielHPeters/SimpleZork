@@ -20,19 +20,29 @@ import zork.interfaces.IUseable;
 import zork.models.entities.Player;
 
 /**
+ * Action for axes
  *
  * @author d.peters
  */
 public class AxeAction implements IUseable {
 
+    /**
+     * Use method without any param if the object should not do something with
+     * any object.
+     */
     @Override
     public void use() {
         System.out.println("You swing the Axe around you. You almost killed yourself in the process.");
     }
 
+    /**
+     * Use item on the player
+     *
+     * @param player the player object.
+     */
     @Override
     public void use(Player player) {
         use();
     }
-    
+
 }

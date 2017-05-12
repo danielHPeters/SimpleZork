@@ -20,15 +20,26 @@ import zork.interfaces.IUseable;
 import zork.models.entities.Player;
 
 /**
+ * Action for the nuka item. Yep it does what it sounds like it does.
  *
  * @author d.peters
  */
 public class NukaAction implements IUseable {
 
+    /**
+     * Use without params. Not supported.
+     */
     @Override
     public void use() {
+        throw new UnsupportedOperationException();
     }
 
+    /**
+     * Only players with special names shall survive the ensuing fallout.
+     *
+     * @param player the player object
+     * @version 1.0.1
+     */
     @Override
     public void use(Player player) {
 

@@ -20,8 +20,11 @@ import zork.interfaces.IUseable;
 import zork.models.entities.Player;
 
 /**
+ * Definition of items. Items can have actions which should be defined in a
+ * spearate class which implements the IUseable interface
  *
  * @author d.peters
+ * @version 1.1.0
  */
 public class Item {
 
@@ -46,10 +49,12 @@ public class Item {
     private double price;
 
     /**
+     * Default constructor. Sets all atributes of the item object except the
+     * action. Use this constructor for unusable items.
      *
-     * @param name
-     * @param description
-     * @param price
+     * @param name name of the item
+     * @param description description text of the item
+     * @param price price of the item
      */
     public Item(String name, String description, double price) {
 
@@ -61,11 +66,13 @@ public class Item {
     }
 
     /**
+     * Secondary constructor. Also sets the action of the item. Use for usable
+     * items.
      *
-     * @param name
-     * @param description
-     * @param price
-     * @param action
+     * @param name name of the item
+     * @param description description text of the item
+     * @param price price of the item
+     * @param action action for item use
      */
     public Item(String name, String description, double price, IUseable action) {
 
@@ -76,66 +83,65 @@ public class Item {
     }
 
     /**
+     * Get name of item.
      *
-     * @return
+     * @return name of item
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Set name of item.
      *
-     * @param name
+     * @param name new name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
+     * Get description of item.
      *
-     * @return
+     * @return description of this item
      */
     public String getDescription() {
         return description;
     }
 
     /**
+     * Set description of this item.
      *
-     * @param description
+     * @param description new description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
+     * Get price of this item.
      *
-     * @return
+     * @return price of this item
      */
     public double getPrice() {
         return price;
     }
 
     /**
+     * Set price of this item.
      *
-     * @param price
+     * @param price new price
      */
     public void setPrice(double price) {
         this.price = price;
     }
 
     /**
+     * Use method to call the use method of the action. Check if the item is
+     * usable.
      *
+     * @param player the player object
      */
-    public void use() {
-
-        if (this.action == null) {
-            System.out.println("You cannot use the " + this.name + ".");
-        } else {
-            this.action.use();
-        }
-
-    }
-
     public void use(Player player) {
         if (this.action == null) {
             System.out.println("You cannot use the " + this.name + ".");

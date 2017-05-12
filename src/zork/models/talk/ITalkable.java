@@ -17,12 +17,21 @@
 package zork.models.talk;
 
 /**
+ * Interface for objects that can talk
  *
  * @author d.peters
+ * @version 1.0.1
  */
 public interface ITalkable {
-    
+
+    /**
+     * Talk to antother object which implements the ITalkable interface
+     * @param to 
+     */
     public void talkTo(ITalkable to);
-    
+
+    /**
+     * Greeting method.
+     */
     public void salutation();
 }
