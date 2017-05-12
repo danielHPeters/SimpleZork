@@ -133,7 +133,7 @@ public class ZorkActions {
         if (command.equals(EVerbs.ALL)) {
 
             this.game.getPlayer().getInventory().forEach(item -> {
-                item.use();
+                item.use(this.game.getPlayer());
             });
         } else {
             for (EItem item : EItem.values()) {
