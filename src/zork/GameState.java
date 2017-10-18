@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2017 Daniel
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package zork;
 
 import java.util.List;
@@ -21,68 +5,41 @@ import zork.models.Room;
 import zork.models.entities.Player;
 
 /**
+ * Game state storage.
  *
  * @author d.peters
+ * @version 1.0
  */
 public class GameState {
+  private Room currentRoom;
+  private final List<Room> rooms;
+  private final Player player;
 
-    /**
-     * Current location of the player
-     */
-    private Room currentRoom;
+  /**
+   * Default constructor which initializes the game objects and the reference
+   * to the scanner object.
+   *
+   * @param player player
+   * @param rooms  list of all rooms
+   */
+  public GameState(Player player, List<Room> rooms) {
+    this.player = player;
+    this.rooms = rooms;
+  }
 
-    /**
-     * All the rooms
-     */
-    private final List<Room> rooms;
+  public Room getCurrentRoom() {
+    return currentRoom;
+  }
 
-    /**
-     * The player object
-     */
-    private final Player player;
+  public void setCurrentRoom(Room currentRoom) {
+    this.currentRoom = currentRoom;
+  }
 
-    /**
-     * Default constructor which initializes the game objects and the reference
-     * to the scanner object.
-     *
-     * @param player
-     * @param rooms
-     */
-    public GameState(Player player, List<Room> rooms) {
-        this.player = player;
-        this.rooms = rooms;
-    }
+  public Player getPlayer() {
+    return player;
+  }
 
-    /**
-     *
-     * @return
-     */
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-    /**
-     *
-     * @param currentRoom
-     */
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Player getPlayer() {
-        return player;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public List<Room> getRooms() {
-        return rooms;
-    }  
-
+  public List<Room> getRooms() {
+    return rooms;
+  }
 }

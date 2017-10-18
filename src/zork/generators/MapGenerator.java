@@ -23,7 +23,7 @@ import zork.models.Room;
 import zork.models.entities.Npc;
 import zork.models.items.Item;
 import zork.models.items.actions.AxeAction;
-import zork.models.items.actions.NukaAction;
+import zork.models.items.actions.NukeAction;
 import zork.models.items.actions.ShovelAction;
 import zork.models.items.actions.WoodAction;
 
@@ -54,7 +54,7 @@ public class MapGenerator {
         Item shovel = new Item("shovel", "A rusty shovel", 1, new ShovelAction());
         Item bucket = new Item("bucket", "It has a hole in it.", 0);
         Item axe = new Item("axe", "A dangerous looking weapon.", 10, new AxeAction());
-        Item nuka = new Item("nuka", "!!!!!!!!!???????", 1111111111, new NukaAction());
+        Item nuka = new Item("nuka", "!!!!!!!!!???????", 1111111111, new NukeAction());
         Item wood = new Item("wood", "???", 100000, new WoodAction());
 
         Npc king = new Npc("King", 40, ENpc.KING);

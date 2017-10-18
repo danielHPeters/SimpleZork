@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 d.peters
+ * Copyright (C) 2017 Daniel
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,24 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package zork.models.talk;
+package zork.interfaces;
+
+import zork.models.entities.Player;
 
 /**
- * Interface for objects that can talk
+ * Interface for useable objects
  *
  * @author d.peters
- * @version 1.0.1
  */
-public interface ITalkable {
+public interface IUseAble {
 
     /**
-     * Talk to antother object which implements the ITalkable interface
-     * @param to 
+     * default use method
      */
-    public void talkTo(ITalkable to);
+    public void use();
 
     /**
-     * Greeting method.
+     * Use on player
+     *
+     * @param player player object
      */
-    public void salutation();
+    public void use(Player player);
+
 }

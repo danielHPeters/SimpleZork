@@ -1,64 +1,48 @@
-/*
- * Copyright (C) 2017 Daniel
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package zork.models.entities.base;
 
 import zork.enums.EStats;
 import zork.interfaces.IDamageable;
 
 /**
+ * Defines entities who can take damage.
  *
  * @author d.peters
+ * @version 1.0
  */
 public abstract class DamageAbleEntity extends Entity implements IDamageable {
+  /**
+   * Default constructor.
+   *
+   * @param name   name of the entity
+   * @param age    age of the entity
+   * @param health initialize health
+   * @param armor  initialize armor
+   */
+  public DamageAbleEntity(String name, int age, Stat health, Stat armor) {
+    super(name, age, new Stat(20, 0, 1000));
+    stats.put(EStats.HEALTH, health);
+    stats.put(EStats.ARMOR, armor);
+  }
 
-    /**
-     *
-     * @param name
-     * @param age
-     * @param health
-     * @param armor
-     */
-    public DamageAbleEntity(String name, int age, Stat health, Stat armor) {
-        super(name, age, new Stat(20, 0, 1000));
-        this.stats.put(EStats.HEALTH, health);
-        this.stats.put(EStats.ARMOR, armor);
+  /**
+   * Check how much damage was given and factor in armor,
+   * resistances etc. to calculate actual damage.
+   *
+   * @param damage damage taken
+   */
+  @Override
+  public void takeDamage(double damage) {
+    if (!getName().equals("Wood")) {
+      double actualDamage = damage - stats.get(EStats.ARMOR).getValue();
+
+      stats.get(EStats.HEALTH).decrease(actualDamage);
+      System.out.println(getName() + " took " + actualDamage + " damage");
+
+      if (stats.get(EStats.HEALTH).getValue() <= 0) {
+        die();
+      }
+    } else {
+      System.out.println("I am Wood, stupid!");
     }
-
-    /**
-     *
-     * @param damage
-     */
-    @Override
-    public void takeDamage(double damage) {
-
-        if (!this.getName().equals("Wood")) {
-            
-            double actualDamage = damage - this.stats.get(EStats.ARMOR).getValue();
-            
-            this.stats.get(EStats.HEALTH).decrease(actualDamage);
-            System.out.println(this.getName() + " took " + actualDamage + " damage");
-
-            if (this.stats.get(EStats.HEALTH).getValue() <= 0) {
-                this.die();
-            }
-        } else {
-            System.out.println("I am Wood, stupid!");
-        }
-
-    }
-
+  }
 }
