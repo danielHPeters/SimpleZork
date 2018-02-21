@@ -1,11 +1,11 @@
 package zork.models.items;
 
-import zork.interfaces.IUseAble;
+import zork.interfaces.IUsable;
 import zork.models.entities.Player;
 
 /**
  * Definition of items. Items can have actions which should be defined in a
- * spearate class which implements the IUseAble interface
+ * spearate class which implements the IUsable interface
  *
  * @author d.peters
  * @version 1.1.0
@@ -14,7 +14,7 @@ public class Item {
   /**
    * Action of item. Null by default.
    */
-  private final IUseAble action;
+  private final IUsable action;
 
   /**
    * Name of item.
@@ -55,7 +55,7 @@ public class Item {
    * @param price       price of the item
    * @param action      action for item use
    */
-  public Item(String name, String description, double price, IUseAble action) {
+  public Item(String name, String description, double price, IUsable action) {
 
     this.name = name;
     this.description = description;

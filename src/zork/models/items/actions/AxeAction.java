@@ -1,6 +1,6 @@
 package zork.models.items.actions;
 
-import zork.interfaces.IUseAble;
+import zork.interfaces.IUsable;
 import zork.models.entities.Player;
 
 /**
@@ -9,7 +9,7 @@ import zork.models.entities.Player;
  * @author d.peters
  * @version 1.0
  */
-public class AxeAction implements IUseAble {
+public class AxeAction implements IUsable {
   /**
    * Use method without any param if the object should not do something with any object.
    */

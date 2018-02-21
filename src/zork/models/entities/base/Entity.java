@@ -8,7 +8,7 @@ import zork.interfaces.IMoveable;
 /**
  * Basic Entity.
  *
- * @author d.peters
+ * @author Daniel Peters
  * @version 1.0
  */
 public abstract class Entity implements IMoveable {

@@ -1,6 +1,6 @@
 package zork.models.items.actions;
 
-import zork.interfaces.IUseAble;
+import zork.interfaces.IUsable;
 import zork.models.entities.Player;
 
 /**
@@ -8,7 +8,7 @@ import zork.models.entities.Player;
  *
  * @author d.peters
  */
-public class NukeAction implements IUseAble {
+public class NukeAction implements IUsable {
   /**
    * Use without params. Not supported.
    */

@@ -6,7 +6,7 @@ import zork.interfaces.IDamageable;
 /**
  * Defines entities who can take damage.
  *
- * @author d.peters
+ * @author Daniel Peters
  * @version 1.0
  */
 public abstract class DamageAbleEntity extends Entity implements IDamageable {

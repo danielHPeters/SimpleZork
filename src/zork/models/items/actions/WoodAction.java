@@ -1,6 +1,6 @@
 package zork.models.items.actions;
 
-import zork.interfaces.IUseAble;
+import zork.interfaces.IUsable;
 import zork.models.entities.Player;
 
 /**
@@ -9,7 +9,7 @@ import zork.models.entities.Player;
  * @author d.peters
  * @version 1.0.1
  */
-public class WoodAction implements IUseAble {
+public class WoodAction implements IUsable {
   @Override
   public void use() {
   }
