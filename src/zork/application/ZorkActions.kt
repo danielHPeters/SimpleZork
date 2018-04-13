@@ -107,18 +107,11 @@ class ZorkActions(private val parser: Parser, private val ui: IUserInterface, pr
     }
 
     val command = commandsList.poll()
-
     if (!game.currentRoom.characters.isEmpty()) {
-      ENpc.values().forEach {
-        val npcId = ENpc.valueOf(command.toString())
-        game.currentRoom.characters.forEach { character ->
-          if (character is Npc) {
-            if (character.npcId == npcId) {
-              game.player.talkTo(character)
-            }
-          }
-        }
-      }
+      val npcId = ENpc.values().filter { value -> value == ENpc.valueOf(command.toString()) }[0]
+      val npc = game.currentRoom.characters.filter { entity -> (entity as Npc).npcId == npcId }[0] as Npc
+      ui.displayMessage(game.player.greet())
+      ui.displayMessage(npc.greet())
     }
   }
 
@@ -242,7 +235,11 @@ class ZorkActions(private val parser: Parser, private val ui: IUserInterface, pr
    * Print contents of the players inventory.
    */
   fun showPlayerInventory() {
-    game.player.showInventory()
+    if (game.player.inventory.isEmpty()) {
+      ui.displayMessage("Your inventory is empty.")
+    } else {
+      game.player.inventory.forEach { item -> ui.displayMessage("Item: " + item.name + " - " + item.description + " - Price: " + item.price) }
+    }
   }
 
   /**

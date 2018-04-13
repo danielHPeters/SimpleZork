@@ -17,5 +17,5 @@ interface ITalkAble {
   /**
    * Greeting method.
    */
-  fun salutation()
+  fun greet(): String
 }

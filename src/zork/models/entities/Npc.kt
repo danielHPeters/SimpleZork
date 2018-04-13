@@ -20,14 +20,8 @@ class Npc(name: String, age: Int, val npcId: ENpc) : DamageAbleEntity(name, age,
   /**
    * Greet the player.
    */
-  override fun salutation() {
-    if (name == "Wood") {
-      System.out.println("$name: I am $name, stupid!")
-    } else {
-      if (alive) {
-        System.out.println("$name: Hello, I am the $name.")
-      }
-    }
+  override fun greet(): String {
+    return if (name == "Wood") "$name: I am $name, stupid!" else "$name: Hello, I am the $name"
   }
 
   /**

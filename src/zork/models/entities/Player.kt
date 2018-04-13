@@ -20,17 +20,6 @@ class Player(name: String, age: Int) : DamageAbleEntity(name, age, Stat(100.0, 0
   }
 
   /**
-   * List all items in this players inventory.
-   */
-  fun showInventory() {
-    if (inventory.isEmpty()) {
-      System.out.println("Your inventory is empty.")
-    } else {
-      inventory.forEach { item -> System.out.println("Item: " + item.name + " - " + item.description + " - Price: " + item.price) }
-    }
-  }
-
-  /**
    * Display all stats of this player.
    */
   fun displayStats() {
@@ -42,11 +31,9 @@ class Player(name: String, age: Int) : DamageAbleEntity(name, age, Stat(100.0, 0
   }
 
   override fun talkTo(to: ITalkAble) {
-    salutation()
-    to.salutation()
   }
 
-  override fun salutation() {
-    System.out.println("Me: Hello there. I'm $name. How do you do?")
+  override fun greet(): String {
+    return "Me: Hello there. I'm $name. How do you do?"
   }
 }
