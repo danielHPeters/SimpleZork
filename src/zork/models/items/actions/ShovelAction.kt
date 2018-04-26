@@ -6,7 +6,7 @@ import zork.interfaces.IItemAction
  * Action for shovel items.
  *
  * @author Daniel Peters
- * @version 1.0.1
+ * @version 1.1.0
  */
 class ShovelAction: IItemAction {
   /**

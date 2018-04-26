@@ -5,7 +5,7 @@ package zork.models.entities.base
  *
  * @author Daniel Peters
  *
- * @version 1.1
+ * @version 1.1.0
  */
 class Stat(var value: Double, var minValue: Double, var maxValue: Double) {
   /**

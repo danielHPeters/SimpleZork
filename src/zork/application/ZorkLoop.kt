@@ -7,7 +7,7 @@ import zork.enums.EVerbs
  * This class contains the main loop an its relevant objects.
  *
  * @author Daniel Peters
- * @version 1.0
+ * @version 1.1.0
  */
 class ZorkLoop(private val actions: ZorkActions) {
   /**

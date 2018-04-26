@@ -7,7 +7,7 @@ import zork.interfaces.IDamageable
  * Defines entities who can take damage.
  *
  * @author Daniel Peters
- * @version 1.0
+ * @version 1.1.0
  */
  abstract class DamageAbleEntity(name: String, age: Int, health: Stat, armor: Stat) : Entity(name, age, Stat(20.0, 0.0, 1000.0)), IDamageable {
   /**

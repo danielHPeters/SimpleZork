@@ -11,10 +11,7 @@ import zork.interfaces.IItemAction
  */
 class Item(var name: String, var description: String, var price: Double, private val action: IItemAction) {
   /**
-   * Use method to call the execute method of the action. Check if the item is
-   * usable.
-   *
-   * @param player the player object
+   * Use method to call the execute method of the action.
    */
   fun use() {
     action.execute()

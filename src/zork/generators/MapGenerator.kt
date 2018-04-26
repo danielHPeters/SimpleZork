@@ -12,7 +12,7 @@ import zork.models.items.actions.*
  * config file
  *
  * @author Daniel Peters
- * @version 1.0.4
+ * @version 1.1.0
  */
 class MapGenerator(private val ui: IUserInterface) {
   /**

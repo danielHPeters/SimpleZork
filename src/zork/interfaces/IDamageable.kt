@@ -4,7 +4,7 @@ package zork.interfaces
  * Interface for damageable objects.
  *
  * @author Daniel Peters
- * @version 1.0
+ * @version 1.1.0
  */
 interface IDamageable {
   /**

@@ -9,7 +9,7 @@ import zork.models.talk.ITalkAble
 /**
  * In game Representation of players.
  *
- * @author d.peters
+ * @author Daniel Peters
  * @version 1.1.0
  */
 class Player(name: String, age: Int) : DamageAbleEntity(name, age, Stat(100.0, 0.0, 200.0), Stat(5.0, 0.0, 100.0)), ITalkAble {

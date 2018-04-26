@@ -7,7 +7,8 @@ import zork.models.entities.Player
 /**
  * Generator for player objects.
  *
- * @author d.peters
+ * @author Daniel Peters
+ * @version 1.1.0
  */
 class PlayerGenerator(private val scanner: Scanner, private val ui: IUserInterface) {
   /**

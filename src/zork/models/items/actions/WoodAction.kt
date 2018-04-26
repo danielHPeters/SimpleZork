@@ -7,7 +7,7 @@ import zork.interfaces.IUserInterface
  * Some fun class intended for special joke item. Don't take it too serious -).
  *
  * @author Daniel Peters
- * @version 1.0.1
+ * @version 1.1.0
  */
 class WoodAction(private val ui: IUserInterface) : IItemAction {
   /**

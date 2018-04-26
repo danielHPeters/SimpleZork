@@ -8,7 +8,7 @@ import zork.models.items.Item
 /**
  * Class describing a room object.
  *
- * @author d.peters
+ * @author Daniel Peters
  * @version 1.1.0
  */
 class Room(var name: String, var description: String) {
@@ -79,5 +79,4 @@ class Room(var name: String, var description: String) {
       }
     }
   }
-
 }

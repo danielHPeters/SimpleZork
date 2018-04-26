@@ -7,7 +7,7 @@ import zork.interfaces.IMoveable
  * Basic Entity.
  *
  * @author Daniel Peters
- * @version 1.0
+ * @version 1.1.0
  */
  abstract class Entity(var name: String, var age: Int, attack: Stat) : IMoveable {
   var  alive: Boolean

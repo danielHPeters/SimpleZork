@@ -5,8 +5,8 @@ import zork.interfaces.IItemAction
 /**
  * Action for axes.
  *
- * @author d.peters
- * @version 1.0
+ * @author Daniel Peters
+ * @version 1.1.0
  */
  class AxeAction: IItemAction {
   /**

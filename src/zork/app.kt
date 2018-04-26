@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
   val ui = ConsoleUI()
   val parser = Parser(scanner)
   val pGen = PlayerGenerator(scanner, ui)
-  val player = pGen.createPlayer();
+  val player = pGen.createPlayer()
   val mGen = MapGenerator(ui)
   val rooms = mGen.createRooms()
   val game = GameState(player, rooms, rooms[3])

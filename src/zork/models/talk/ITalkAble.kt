@@ -3,8 +3,8 @@ package zork.models.talk
 /**
  * Interface for objects that can talk.
  *
- * @author d.peters
- * @version 1.0.1
+ * @author Daniel Peters
+ * @version 1.1.0
  */
 interface ITalkAble {
   /**

@@ -1,10 +1,10 @@
-package zork.enums;
+package zork.enums
 
 /**
  * Verbs enum.
  *
  * @author Daniel Peters
- * @version 1.0.4
+ * @version 1.1.0
  */
 enum class EVerbs(val details: String) {
   GO("Combine with a direction to go somewhere."),

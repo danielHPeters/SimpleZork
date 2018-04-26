@@ -9,7 +9,7 @@ import zork.models.talk.ITalkAble
 /**
  * Blueprint for Npc objects.
  *
- * @author d.peters
+ * @author Daniel Peters
  * @version 1.1.0
  */
 class Npc(name: String, age: Int, val npcId: ENpc) : DamageAbleEntity(name, age, Stat(100.0, 0.0, 200.0), Stat(0.0, 0.0, 80.0)), ITalkAble {
