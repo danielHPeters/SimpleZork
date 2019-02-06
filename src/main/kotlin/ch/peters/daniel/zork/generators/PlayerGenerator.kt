@@ -7,8 +7,8 @@ import ch.peters.daniel.zork.models.entities.Player
 /**
  * Generator for player objects.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class PlayerGenerator(private val scanner: Scanner, private val ui: UserInterface) {
   /**

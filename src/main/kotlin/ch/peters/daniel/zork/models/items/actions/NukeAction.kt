@@ -5,8 +5,8 @@ import ch.peters.daniel.zork.ui.UserInterface
 /**
  * Action for the nuke item. Yep it does what it sounds like it does.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class NukeAction(private val ui: UserInterface) : ItemAction {
   /**

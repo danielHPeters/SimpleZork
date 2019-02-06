@@ -5,11 +5,11 @@ import ch.peters.daniel.zork.models.entities.Damageable
 /**
  * Defines entities who can take damage.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 abstract class DamageAbleEntity(name: String, age: Int, health: Stat, armor: Stat) :
-    Entity(name, age, Stat(20.0, 0.0, 1000.0)), Damageable {
+  Entity(name, age, Stat(20.0, 0.0, 1000.0)), Damageable {
   /**
    * Check how much damage was given and factor in armor,
    * resistances etc. to calculate actual damage.

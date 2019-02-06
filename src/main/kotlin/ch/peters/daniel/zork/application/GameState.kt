@@ -6,7 +6,7 @@ import ch.peters.daniel.zork.models.entities.Player
 /**
  * Game state storage.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class GameState(val player: Player, val rooms: List<Room>, var currentRoom: Room)

@@ -8,8 +8,8 @@ import ch.peters.daniel.zork.models.items.Item
 /**
  * Class describing a room object.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class Room(var name: String, var description: String) {
   companion object {

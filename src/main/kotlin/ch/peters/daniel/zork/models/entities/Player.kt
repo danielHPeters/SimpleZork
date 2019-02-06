@@ -9,8 +9,8 @@ import ch.peters.daniel.zork.models.talk.Speaker
 /**
  * In game Representation of players.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class Player(name: String, age: Int) : DamageAbleEntity(name, age, Stat(100.0, 0.0, 200.0), Stat(5.0, 0.0, 100.0)), Speaker {
   val inventory: MutableList<Item>

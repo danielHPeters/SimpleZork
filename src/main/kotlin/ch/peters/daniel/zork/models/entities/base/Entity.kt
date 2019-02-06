@@ -5,8 +5,8 @@ import ch.peters.daniel.zork.models.entities.Moveable
 /**
  * Basic Entity.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 abstract class Entity(var name: String, var age: Int, attack: Stat) : Moveable {
   var alive: Boolean

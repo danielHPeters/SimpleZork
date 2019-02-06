@@ -3,9 +3,9 @@ package ch.peters.daniel.zork.models.entities.base
 /**
  * Container object for player stat.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  *
- * @version 1.1.0
+ * @version 1.1
  */
 class Stat(var value: Double, var minValue: Double, var maxValue: Double) {
   /**

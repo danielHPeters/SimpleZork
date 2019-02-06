@@ -6,8 +6,8 @@ import ch.peters.daniel.zork.enums.Verb
 /**
  * This class contains the main loop an its relevant objects.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class ZorkLoop(private val actions: ZorkActions) {
   /**

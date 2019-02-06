@@ -7,8 +7,8 @@ import java.util.*
  * This class contains parsing methods to handle user submitted input. Still
  * work in progress.
  *
- * @author d.peters
- * @version 1.0.1
+ * @author Daniel Peters
+ * @version 1.0
  */
 class Parser(private val scanner: Scanner) {
   /**

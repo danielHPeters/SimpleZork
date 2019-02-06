@@ -3,8 +3,8 @@ package ch.peters.daniel.zork.enums
 /**
  * Verb enum.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 enum class Verb(val details: String) {
   GO("Combine with a direction to go somewhere."),

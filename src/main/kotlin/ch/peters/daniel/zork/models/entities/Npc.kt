@@ -9,8 +9,8 @@ import ch.peters.daniel.zork.models.talk.Speaker
 /**
  * Blueprint for Npc objects.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class Npc(name: String, age: Int, val npcTypeId: NpcType) : DamageAbleEntity(name, age, Stat(100.0, 0.0, 200.0), Stat(0.0, 0.0, 80.0)), Speaker {
   init {

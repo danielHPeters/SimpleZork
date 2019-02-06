@@ -5,8 +5,8 @@ import ch.peters.daniel.zork.ui.UserInterface
 /**
  * Some fun class intended for special joke item. Don't take it too serious -).
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class WoodAction(private val ui: UserInterface) : ItemAction {
   /**

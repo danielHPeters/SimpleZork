@@ -3,8 +3,8 @@ package ch.peters.daniel.zork.ui
 /**
  * Interface for user interfaces (graphical or commandline).
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 interface UserInterface {
   /**

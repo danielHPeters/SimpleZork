@@ -11,8 +11,8 @@ import ch.peters.daniel.zork.models.items.actions.*
  * Generator for rooms. TODO make dynamic and procedurally generated or via
  * config file
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class MapGenerator(private val ui: UserInterface) {
   /**

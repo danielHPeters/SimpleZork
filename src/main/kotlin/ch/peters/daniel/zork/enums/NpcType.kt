@@ -1,10 +1,10 @@
 package ch.peters.daniel.zork.enums
 
 /**
- * Enum listing npc's in the game.
+ * Enum listing NPC's in the game.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 enum class NpcType {
   KING, COOK, WOOD

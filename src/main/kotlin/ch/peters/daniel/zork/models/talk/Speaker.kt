@@ -3,7 +3,7 @@ package ch.peters.daniel.zork.models.talk
 /**
  * Interface for objects that can talk.
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
+ * @author Daniel Peters
  * @version 1.1.0
  */
 interface Speaker {

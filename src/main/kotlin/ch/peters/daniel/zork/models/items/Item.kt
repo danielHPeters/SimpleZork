@@ -6,8 +6,8 @@ import ch.peters.daniel.zork.models.items.actions.ItemAction
  * Definition of items. Items can have actions which should be defined in a
  * separate class which implements the ItemAction interface
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class Item(var name: String, var description: String, var price: Double, private val action: ItemAction) {
   /**

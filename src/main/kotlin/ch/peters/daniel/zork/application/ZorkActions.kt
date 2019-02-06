@@ -14,8 +14,8 @@ import ch.peters.daniel.zork.utils.Parser
  * Here the game actions are defined. Only this class should know the state of
  * the game objects
  *
- * @author Daniel Peters <daniel.peters.ch@gmail.com>
- * @version 1.1.0
+ * @author Daniel Peters
+ * @version 1.1
  */
 class ZorkActions(private val parser: Parser, private val ui: UserInterface, private val game: GameState) {
   /**
